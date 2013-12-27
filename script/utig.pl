@@ -35,7 +35,9 @@ my $ircd = App::Uc::TwitterIrcGateway->new(
     port => $port,
     servername => 'utig.pl',
     welcome => 'Welcome to the utig server',
+    motd_text => do { local $/; <DATA> },
     time_zone => 'Asia/Tokyo',
+    app_dir_to_home => 1,
     debug => $debug,
 
     consumer_key    => $conf->{consumer_key},
@@ -45,4 +47,34 @@ my $ircd = App::Uc::TwitterIrcGateway->new(
 $ircd->run();
 $cv->recv();
 
-1;
+exit;
+
+__DATA__
+Version 0.1.0
+
+App::Uc::TwitterIrcGateway として分割
+    ログインしてstream,activity,listsにjoin,streamの取得,発言まで
+    OAuth認証機能がうまく行ってないの修正
+    listのメンバー取るのに時間かかってjoinまで相当待たされるの改善した
+    自分を含むリストに自分の発言が流れない不具合修正
+
+Uc::IrcGateway 作りこみ計画
+    ゲートウェイサーバ基底クラスとしての完成度上げたい
+        プロクシ
+        ctcp-action拡張
+        外部サービスとの連携機能(簡単にapi叩けるようにする設定のしくみ)
+        タイマーイベント
+        テスト
+    各種コマンド完成
+        残: pass, mode, names, privmsg, who, whois
+    各コマンドのマスク機能(そのうち)
+    設定を gatewaybot と対話で出来るようにしてはどうか
+    memo: プラガブルにしてロガーつけてデータベース使いだしたらメモリ消費7MB増
+
+TODO:
+    retweet の取り消しできてない
+    on_event と MySQL の連携
+    Twitterアカウントのデータ更新
+    process_event の復旧
+    PODの内容検討
+    いい感じに継承する方法の検討
