@@ -2,6 +2,26 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v0.1.0 2013-12-27T20:30:14Z
+
+    - return some function from parent project.
+
+        - oauth, register, lists, streamer, process_tweet, post tweet
+
+    - add features
+
+        - userdata in sqlite
+
+    - add attributes
+
+        - consumer_key, consumer_secret
+
+    - bugfix: login user's nick and login are broken on register.
+    - bugfix: fetch_list grabs join command to spend much time.
+    - bugfix: user and channel data are not updated.
+    - bugfix: oauth authentication cannot be completed.
+    - bugfix: no provide own tweet to the list includes oneself.
+
 v0.0.0 2013-11-10T08:51:31Z
 
     - new project as a spin-off from Uc::IrcGateway
