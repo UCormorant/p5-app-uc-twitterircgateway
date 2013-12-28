@@ -5,7 +5,9 @@ use warnings;
 use utf8;
 
 use Uc::IrcGateway::Common;
+use Uc::IrcGateway::TypableMap;
 use parent 'Uc::IrcGateway';
+__PACKAGE__->load_components(qw/Tweet/);
 __PACKAGE__->load_plugins(qw/DefaultSet CustomRegisterUser Irc::Pin/);
 
 use Uc::Model::Twitter;
@@ -14,40 +16,10 @@ use AnyEvent::Twitter;
 use AnyEvent::Twitter::Stream;
 use HTML::Entities qw(decode_entities);
 use DateTime::Format::DateParse;
-use Config::Pit qw(pit_get pit_set);
+use Config::Pit qw(pit_get);
 use Scalar::Util qw(refaddr blessed);
 use Clone qw(clone);
-use Path::Class qw(file dir);
-use YAML ();
 
-my %action_command = (
-    mention      => qr{^me(?:ntion)?$},
-    reply        => qr{^re(?:ply)?$},
-    favorite     => qr{^f(?:av(?:ou?rites?)?)?$},
-    unfavorite   => qr{^unf(?:av(?:ou?rites?)?)?$},
-    retweet      => qr{^r(?:etwee)?t$},
-    quotetweet   => qr{^(?:q[wt]|quote(?:tweet)?)$},
-    delete       => qr{^(?:o+p+s+!*|del(?:ete)?)$},
-    list         => qr{^li(?:st)?$},
-    information  => qr{^in(?:fo(?:rmation)?)?$},
-    conversation => qr{^co(?:nversation)?$},
-    ratelimit    => qr{^(?:rate(?:limit)?|limit)$},
-    ngword       => qr{^ng(?:word)?$},
-);
-my @action_command_info = (qq|action commands:|
-,  qq|/me mention (or me): fetch mentions|
-,  qq|/me reply (or re) <tid> <text>: reply to a <tid> tweet|
-,  qq|/me favorite (or f, fav) +<tid>: add <tid> tweets to favorites|
-,  qq|/me unfavorite (or unf, unfav) +<tid>: remove <tid> tweets from favorites|
-,  qq|/me retweet (or rt) +<tid>: retweet <tid> tweets|
-,  qq|/me quotetweet (or qt, qw) <tid> <text>: quotetweet a <tid> tweet, like "<text> QT \@tid_user: tid_tweet"|
-,  qq|/me delete (or del, oops) *<tid>: delete your <tid> tweets. if unset <tid>, delete your last tweet|
-,  qq|/me list (or li) <screen_name>: list <screen_name>'s recent 20 tweets|
-,  qq|/me information (or in, info) +<tid>: show <tid> tweets information. e.g. retweet_count, has conversation, created_at|
-,  qq|/me conversation (or co) <tid>: show <tid> tweets conversation|
-,  qq|/me ratelimit (or rate, limit): show remaining api hit counts|
-,  qq|/me ngword (or ng) <text>: set/delete a NG word. if unset <text>, show all NG words|
-);
 my %api_method = (
     post => qr {
         ^statuses
@@ -96,6 +68,75 @@ my %api_method = (
 );
 
 
+# TwitterIrcGateway subroutines #
+
+sub validate_text {
+    my $text = shift // return '';
+
+    replace_crlf(decode_entities($text));
+}
+
+sub validate_user {
+    my $user = shift;
+    my @target_val = qw/name url location description/;
+    my @escape = map { 'original_'.$_ } @target_val;
+    @{$user}{@escape} = @{$user}{@target_val};
+    $user->{name}        = validate_text($user->{name});
+    $user->{url}         = validate_text($user->{url});
+    $user->{location}    = validate_text($user->{location});
+    $user->{description} = validate_text($user->{description});
+    $user->{url} = "https://twitter.com/$user->{screen_name}" if $user->{url} eq '';
+
+    $user->{_validated} = 1;
+}
+
+sub validate_tweet {
+    my $tweet = shift;
+    @{$tweet}{qw/original_text original_source/} = @{$tweet}{qw/text source/};
+    $tweet->{text}   = validate_text($tweet->{text});
+    $tweet->{source} = validate_text($tweet->{source});
+    if (exists $tweet->{retweeted_status}) {
+        @{$tweet->{retweeted_status}}{qw/original_text original_source/} = @{$tweet->{retweeted_status}}{qw/text source/};
+        $tweet->{retweeted_status}{text}   = validate_text($tweet->{retweeted_status}{text});
+        $tweet->{retweeted_status}{source} = validate_text($tweet->{retweeted_status}{source});
+    }
+
+    validate_user($tweet->{user}) if $tweet->{user} and not $tweet->{user}{_validated};
+
+    $tweet->{_validated} = 1;
+}
+
+sub new_user {
+    my $user = shift;
+    validate_user($user) if !$user->{_validated};
+
+    Uc::IrcGateway::TempUser->new(
+        registered => 1,
+        nick => $user->{screen_name}, login => $user->{id}, realname => $user->{name},
+        host => 'twitter.com', addr => '127.0.0.1', server => $user->{url},
+        away_message => $user->{location}, userinfo => $user->{description},
+    );
+}
+
+sub datetime2simple {
+    my ($created_at, $time_zone) = @_;
+    my %opt = ();
+    $opt{time_zone} = $time_zone if $time_zone;
+
+    my $dt_now        = DateTime->now(%opt);
+    my $dt_created_at = DateTime::Format::DateParse->parse_datetime($created_at);
+    $dt_created_at->set_time_zone( $time_zone ) if $time_zone;
+
+    my $date_delta = $dt_now - $dt_created_at;
+    my $time = '';
+       $time = $dt_created_at->hms            if $date_delta->minutes;
+       $time = $dt_created_at->ymd . " $time" if $dt_created_at->day != $dt_now->day;
+
+    $time;
+}
+
+use namespace::clean;
+
 use Class::Accessor::Lite (
     rw => [qw(
         stream_channel
@@ -143,131 +184,6 @@ sub register_user {
     }
 }
 
-sub todo_build_logger {
-    my $self = shift;
-    my $logger = Uc::IrcGateway::Logger->new(
-        gateway => $self,
-        log_debug => $self->debug,
-        logging => sub {
-            my ($self, $queue, %args) = @_;
-
-            if (ref $queue) {
-                push @{$self->{queue}}, $queue if ref $queue->{tweet} && ref $queue->{user};
-                return;
-            }
-
-            eval {
-                my $txn = $self->{schema}->txn_scope;
-                while (my $q = shift @{$self->{queue}}) {
-                    $self->{schema}->find_or_create_status_from_tweet(
-                        $q->{tweet},
-                        { user_id => $q->{user}->login, ignore_remark_disabling => 1 }
-                    );
-                }
-                $txn->commit;
-            };
-
-            if ($@ && exists $args{handle}) {
-                $self->debug($@, handle => $args{handle});
-                delete $self->gateway->handles->{refaddr $args{handle}};
-#                if ($@ =~ /Rollback failed/) {
-#                    undef $handle;
-#                }
-            }
-        },
-#        debugging => sub {},
-        remark => sub {
-            my ($self, $handle, $attr) = @_;
-
-            my $id  = delete $attr->{id}  if exists $attr->{id};
-            my $tid = delete $attr->{tid} if exists $attr->{tid};
-            $id = $handle->{tmap}->get($tid) if $tid;
-
-            my $columns = { id => $id, user_id => $handle->self->login };
-            for my $col (qw/favorited retweeted/) {
-                $columns->{$col} = delete $attr->{$col} if exists $attr->{$col};
-            }
-
-            $self->{schema}->update_or_create_remark_with_retweet( $columns );
-        },
-    );
-    my $mysql = pit_get('mysql', require => {
-        user => '',
-        pass => '',
-    });
-    $logger->{schema} = Uc::Model::Twitter->new( connect_info => ['dbi:mysql:twitter', $mysql->{user}, $mysql->{pass}, {
-        mysql_enable_utf8 => 1,
-        on_connect_do     => ['set names utf8mb4'],
-    }]);
-    $logger->{trigger} = AE::timer 10, 10, sub { $logger->log; };
-
-    $self->logger($logger);
-}
-
-
-# TwitterIrcGateway subroutines #
-
-sub validate_text {
-    my $text = shift // return '';
-
-    replace_crlf(decode_entities($text));
-}
-
-sub validate_user {
-    my $user = shift;
-    my @target_val = qw/name url location description/;
-    my @escape = map { 'original_'.$_ } @target_val;
-    @{$user}{@escape} = @{$user}{@target_val};
-    $user->{name}        = validate_text($user->{name});
-    $user->{url}         = validate_text($user->{url});
-    $user->{location}    = validate_text($user->{location});
-    $user->{description} = validate_text($user->{description});
-    $user->{url} = "https://twitter.com/$user->{screen_name}" if $user->{url} eq '';
-
-    $user->{_validated} = 1;
-}
-
-sub validate_tweet {
-    my $tweet = shift;
-    @{$tweet}{qw/original_text original_source/} = @{$tweet}{qw/text source/};
-    $tweet->{text}   = validate_text($tweet->{text});
-    $tweet->{source} = validate_text($tweet->{source});
-
-    validate_user($tweet->{user}) if $tweet->{user} and not $tweet->{user}{_validated};
-
-    $tweet->{_validated} = 1;
-}
-
-sub new_user {
-    my $user = shift;
-    validate_user($user) if !$user->{_validated};
-
-    Uc::IrcGateway::TempUser->new(
-        registered => 1,
-        nick => $user->{screen_name}, login => $user->{id}, realname => $user->{name},
-        host => 'twitter.com', addr => '127.0.0.1', server => $user->{url},
-        away_message => $user->{location}, userinfo => $user->{description},
-    );
-}
-
-sub datetime2simple {
-    my ($created_at, $time_zone) = @_;
-    my %opt = ();
-    $opt{time_zone} = $time_zone if $time_zone;
-
-    my $dt_now        = DateTime->now(%opt);
-    my $dt_created_at = DateTime::Format::DateParse->parse_datetime($created_at);
-    $dt_created_at->set_time_zone( $time_zone ) if $time_zone;
-
-    my $date_delta = $dt_now - $dt_created_at;
-    my $time = '';
-       $time = $dt_created_at->hms            if $date_delta->minutes;
-       $time = $dt_created_at->ymd . " $time" if $dt_created_at->day != $dt_now->day;
-
-    $time;
-}
-
-
 # TwitterIrcGateway method #
 
 sub api {
@@ -287,84 +203,47 @@ sub api {
     $nt->request( %request, $cb );
 }
 
-sub get_mentions {
-    my ($self, $handle, %opt, %params) = @_;
-    my $activity_channel = $handle->options->{activity};
-    my $target = exists $opt{target} ? delete $opt{target} : $activity_channel;
-
-    $params{count}       = $handle->options->{mention_count};
-    $params{include_rts} = $handle->options->{include_rts};
-
-    $params{max_id}   = delete $opt{max_id}   if exists $opt{max_id};
-    $params{since_id} = delete $opt{since_id} if exists $opt{since_id};
-    $self->api($handle, 'statuses/mentions_timeline', params => \%params, cb => sub {
-        my ($header, $res, $reason) = @_;
-        if ($res) {
-            my $mentions = $res;
-
-            if (scalar @$mentions) {
-                for my $mention (reverse @$mentions) {
-                    $self->process_tweet($handle, tweet => $mention, target => $activity_channel);
-                }
-            }
-            else {
-                $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, qq|mention: no new mentions yet| );
-            }
-        }
-        else {
-            $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, qq|mention fetching error: $reason| );
-        }
-    });
-}
-
 sub tid_event {
     my ($self, $handle, $api, $tid, %opt) = @_;
-    $self->logger->log();
+
+    my $text = '';
     my $target = delete $opt{target} || $handle->self->nick;
     my $tweet_id = $handle->{tmap}->get($tid);
-    my $tweet = $self->logger->{schema}->search('status', { id => $tweet_id })->next;
-    my $text = '';
+    my $tweet = $self->get_tweet($handle, $tweet_id);
     my @event = split('/', $api);
     my $event = $event[1] =~ /(create)|(destroy)/ ? ($2 ? 'un' : '') . $event[0]
                                                   : $event[1];
-    my $cb = $opt{overload} && exists $opt{cb}       ? delete $opt{cb}
-           : $opt{overload} && exists $opt{callback} ? delete $opt{callback} : sub {
-        my ($header, $res, $reason) = @_;
-        if (!$res) { $text = "$event error: $reason"; }
-        else {
-            $event =~ s/[es]+$//;
-            $text = validate_text("${event}ed: ".$tweet->user->screen_name.": ".$tweet->text);
-        }
-        $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, "$text [$tid]" );
-
-        my $sub = exists $opt{cb}       ? delete $opt{cb}
-                : exists $opt{callback} ? delete $opt{callback} : undef;
-        $sub->(@_) if defined $sub;
-    };
-    my $params = delete $opt{params} || {};
 
     if (!$tweet) {
         $text = "$event error: no such tid";
         $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, "$text [$tid]" );
     }
     else {
+        my $cb = $opt{overload} && exists $opt{cb}       ? delete $opt{cb}
+               : $opt{overload} && exists $opt{callback} ? delete $opt{callback} : sub {
+            my ($header, $res, $reason) = @_;
+            if (!$res) { $text = "$event error: $reason"; }
+            else {
+                $event =~ s/[es]+$//;
+                $text = validate_text("${event}ed: ".$tweet->{user}{screen_name}.": ".$tweet->{text});
+            }
+            $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, "$text [$tid]" );
+
+            my $sub = exists $opt{cb}       ? delete $opt{cb}
+                    : exists $opt{callback} ? delete $opt{callback} : undef;
+            $sub->(@_) if defined $sub;
+        };
+        my $params = delete $opt{params} || +{};
+
         my %params;
         if ($event[0] eq 'favorites') {
             $params{id} = $tweet_id;
         }
-        else {
-            $api .= "/$tweet_id";
+        elsif ($api =~ /:id/) {
+            $api =~ s/:id/$tweet_id/g;
         }
         $self->api($handle, $api, cb => $cb, params => \%params);
     }
-}
-
-sub lookup_users {
-    my ($self, $handle, @reals) = @_;
-    my $stream_channel_name = $handle->options->{stream};
-    return () unless $handle->has_channel($stream_channel_name);
-
-    $handle->get_channels($stream_channel_name)->get_nicks(@reals);
 }
 
 sub check_ngword {
@@ -390,6 +269,7 @@ sub check_ngword {
     }
     return 1;
 }
+
 sub process_tweet {
     my ($self, $handle, %opt) = @_;
 
@@ -405,11 +285,12 @@ sub process_tweet {
     return unless $nick and $tweet->{text};
 
     my $raw_tweet = clone $tweet;
+    $self->set_tweet($handle, $raw_tweet);
     $self->log($handle, tweet2db => { tweet => $raw_tweet, user => $handle->self } );
 
     validate_tweet($tweet);
 
-    my $text = $tweet->{text};
+    my $text = exists $tweet->{retweeted_status} ? sprintf('RT @%s: %s', $nick, $tweet->{retweeted_status}{text}) : $tweet->{text};
     my $stream_channel_name   = $handle->options->{stream};
     my $activity_channel_name = $handle->options->{activity};
     my $target_channel_name   = $target ? $target : $stream_channel_name;
@@ -549,10 +430,10 @@ sub process_tweet {
         }
     }
 
-    $handle->{last_mention_id} = $tweet->{id} if $tweet->{_is_mention};
+    $handle->set_state(last_mention_id => $tweet->{id}) if $tweet->{_is_mention};
 
-    $user->last_modified(time);
-#    push @{$handle->{timeline}}, $tweet->{id};
+    $user->update({ last_modified => time });
+    push @{$handle->{timeline}}, $tweet->{id};
 }
 
 sub process_event {
@@ -667,6 +548,34 @@ sub notice_profile_update {
         }
         $self->send_cmd( $handle, $user, 'NOTICE', $activity_channel_name, "changed $change_message{desc}" ) if $old->{desc} ne $new->{desc};
     }
+}
+
+sub get_mentions {
+    my ($self, $handle, %opt, %params) = @_;
+    my $activity_channel = $handle->options->{activity};
+    my $target = exists $opt{target} ? delete $opt{target} : $activity_channel;
+
+    $params{count}    = $handle->options->{mention_count};
+    $params{max_id}   = delete $opt{max_id}   if exists $opt{max_id};
+    $params{since_id} = delete $opt{since_id} if exists $opt{since_id};
+    $self->api($handle, 'statuses/mentions_timeline', params => \%params, cb => sub {
+        my ($header, $res, $reason) = @_;
+        if ($res) {
+            my $mentions = $res;
+
+            if (scalar @$mentions) {
+                for my $mention (reverse @$mentions) {
+                    $self->process_tweet($handle, tweet => $mention, target => $activity_channel);
+                }
+            }
+            else {
+                $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, qq|mention: no new mentions yet| );
+            }
+        }
+        else {
+            $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, qq|mention fetching error: $reason| );
+        }
+    });
 }
 
 sub join_channels {
@@ -859,7 +768,6 @@ sub twitter_configure {
     $handle->{options} = \%opt;
     $handle->options->{account} //= $handle->self->login;
     $handle->options->{mention_count} //= 20;
-    $handle->options->{include_rts} //= 0;
     $handle->options->{shuffle_tid} //= 0;
     if (!$handle->options->{stream} ||
         not $self->check_channel($handle, $handle->options->{stream})) {
@@ -881,9 +789,8 @@ sub twitter_configure {
 
     my $conf = $self->servername.'.'.$handle->options->{account};
     $handle->{conf_user} = pit_get( $conf );
-    $handle->{tmap} = '*';
     $handle->{timeline} = [];
-#    $handle->{tmap} = tie @{$handle->{timeline}}, 'Uc::IrcGateway::TypableMap', shuffled => $handle->options->{shuffle_tid};
+    $handle->{tmap} = tie @{$handle->{timeline}}, 'Uc::IrcGateway::TypableMap', shuffled => $handle->options->{shuffle_tid};
 }
 
 sub twitter_agent {
@@ -1095,10 +1002,6 @@ Follow, unfollow, direct message, block, list, account の操作？そんなも�
 
 =item L<opts>
 
-=item L<AnyEvent::Socket>
-
-=item L<AnyEvent::IRC::Util>
-
 =item L<Net::Twitter::Lite>
 
 =item L<AnyEvent::Twitter>
@@ -1109,17 +1012,11 @@ Follow, unfollow, direct message, block, list, account の操作？そんなも�
 
 =item L<Config::Pit>
 
-=item L<YAML>
-
 =item L<DateTime::Format::HTTP>
 
 =item L<DateTime::Format::DateParse>
 
 =item L<HTML::Entities>
-
-=item L<Path::Class>
-
-=item L<Readonly>
 
 =back
 

@@ -50,6 +50,19 @@ $cv->recv();
 exit;
 
 __DATA__
+Version 1.0.0
+
+古いプロジェクトから大体移植完了
+    tid & actionコマンド復旧
+    #activityにJOINしたら返信取得
+
+    残りは MySQL にツイート&お気に入り保存する機能
+
+fix:
+    チャンネルのユーザが発言してもアイドル時間が伸び続ける不具合修正
+    リツイートの文末が省略表示されないように修正
+
+
 Version 0.1.0
 
 App::Uc::TwitterIrcGateway として分割
@@ -72,7 +85,6 @@ Uc::IrcGateway 作りこみ計画
     memo: プラガブルにしてロガーつけてデータベース使いだしたらメモリ消費7MB増
 
 TODO:
-    retweet の取り消しできてない
     on_event と MySQL の連携
     Twitterアカウントのデータ更新
     process_event の復旧

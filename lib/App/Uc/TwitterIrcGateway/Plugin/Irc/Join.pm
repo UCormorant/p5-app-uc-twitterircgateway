@@ -35,7 +35,7 @@ sub hook :Hook('irc.join.finish') {
             });
         }
         elsif ($res->{channel} eq $activity_channel) {
-#            $self->get_mentions($handle);
+            $self->get_mentions($handle);
         }
     }
 }
