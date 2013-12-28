@@ -66,19 +66,14 @@ utig.pl は userstream の監視プログラムに毛が生えた程度のTwitte
 
 - [perl](http://search.cpan.org/perldoc?perl) >= 5.14
 - [opts](http://search.cpan.org/perldoc?opts)
-- [AnyEvent::Socket](http://search.cpan.org/perldoc?AnyEvent::Socket)
-- [AnyEvent::IRC::Util](http://search.cpan.org/perldoc?AnyEvent::IRC::Util)
 - [Net::Twitter::Lite](http://search.cpan.org/perldoc?Net::Twitter::Lite)
 - [AnyEvent::Twitter](http://search.cpan.org/perldoc?AnyEvent::Twitter)
 - [AnyEvent::Twitter::Stream](http://search.cpan.org/perldoc?AnyEvent::Twitter::Stream)
 - [Clone](http://search.cpan.org/perldoc?Clone)
 - [Config::Pit](http://search.cpan.org/perldoc?Config::Pit)
-- [YAML](http://search.cpan.org/perldoc?YAML)
 - [DateTime::Format::HTTP](http://search.cpan.org/perldoc?DateTime::Format::HTTP)
 - [DateTime::Format::DateParse](http://search.cpan.org/perldoc?DateTime::Format::DateParse)
 - [HTML::Entities](http://search.cpan.org/perldoc?HTML::Entities)
-- [Path::Class](http://search.cpan.org/perldoc?Path::Class)
-- [Readonly](http://search.cpan.org/perldoc?Readonly)
 
 # BUGS AND LIMITATIONS
 

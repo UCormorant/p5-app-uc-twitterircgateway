@@ -2,6 +2,21 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v1.0.0 2013-12-28T23:44:11Z
+
+    - version 1.0.0
+
+    - come back features
+
+        - action commands
+        - typable map
+        - get mention
+
+    - bugfix: idle time is never reset.
+    - bugfix: long retweet text is cut off its tail.
+
+    - reject "geven ~ when".
+
 v0.1.0 2013-12-27T20:30:14Z
 
     - return some function from parent project.
