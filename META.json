@@ -52,10 +52,11 @@
             "HTML::Entities" : "0",
             "Net::Twitter::Lite" : "0",
             "Path::Class" : "0",
+            "Smart::Options" : "0",
+            "Term::ReadKey" : "0",
             "Uc::IrcGateway" : "0",
             "Uc::Model::Twitter" : "0",
-            "YAML" : "0",
-            "opts" : "0",
+            "namespace::clean" : "0",
             "perl" : "5.014"
          }
       },
@@ -77,7 +78,7 @@
          "web" : "https://github.com/UCormorant/p5-app-uc-twitterircgateway"
       }
    },
-   "version" : "v1.0.0",
+   "version" : "v1.0.1",
    "x_contributors" : [
       "U=Cormorant <u@chimata.org>"
    ]

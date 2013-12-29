@@ -1,12 +1,12 @@
-package App::Uc::TwitterIrcGateway v1.0.0;
+package App::Uc::TwitterIrcGateway v1.0.1;
 
 use 5.014;
 use warnings;
 use utf8;
 
+use parent 'Uc::IrcGateway';
 use Uc::IrcGateway::Common;
 use Uc::IrcGateway::TypableMap;
-use parent 'Uc::IrcGateway';
 __PACKAGE__->load_components(qw/Tweet/);
 __PACKAGE__->load_plugins(qw/DefaultSet CustomRegisterUser Irc::Pin/);
 
@@ -852,8 +852,14 @@ sub twitter_agent {
             $self->send_msg($handle, 'NOTICE', "the rate limit reset time is $nt->{rate_limit_status}{reset_time}.");
         }
         else {
-            $self->send_msg($handle, 'NOTICE', 'please open the following url and allow this app, then enter /PIN {code}.');
-            $self->send_msg($handle, 'NOTICE', $nt->get_authorization_url);
+            my $authorization_url = eval { $nt->get_authorization_url; };
+            if (not $authorization_url) {
+                $self->send_msg($handle, 'NOTICE', 'failed to get authorization url. shutdown connection.');
+                $self->handle_irc_msg($handle, 'QUIT');
+            } else {
+                $self->send_msg($handle, 'NOTICE', 'please open the following url and allow this app, then enter /PIN {code}.');
+                $self->send_msg($handle, 'NOTICE', $authorization_url);
+            }
         }
     }
 
@@ -907,37 +913,64 @@ App::Uc::TwitterIrcGateway - Twitter IRC Gateway of me by me for me
 
 =head1 SYNOPSIS
 
+=head2 Configure consumer key that utig.pl uses
+
+  $ script/utig.pl configure
+  
+  input Twitter consumer key:
+  input Twitter consumer secret:
+
 =head2 Start twitter irc gateway server
 
-  $ utig --host 0.0.0.0 --port 16668
+  $ script/utig.pl run --host 127.0.0.1 --port 16668
 
 =head2 Login utig.pl server
 
 =over 2
 
-=item 1
+=item *
 
 IRCクライアントで起動したサーバに適当な名前でログインする
 
-=item 2
+=item *
 
 暫くするとサーバーから OAuth 認証用の URL を渡されるので、それを開いて認証する
 
-=item 3
+=item *
 
 IRCクライアントで
 
   /pin <pin code>
 
+=item *
+
+そのうちTwitterストリームの読み込みが始まる
+
 =back
-
-  Welcome to utig.pl server!
-
-好きにするといい！
 
 =head1 DESCRIPTION
 
 utig.pl は userstream の監視プログラムに毛が生えた程度のTwitter IRCゲートウェイサーバです
+
+=head1 INSTALLATION
+
+=head2 GitHub Checkout
+
+  $ git clone git@github.com:UCormorant/utig.pl.git
+
+  # and run utig.pl
+
+  $ cd utig.pl
+  $ perl script/utig.pl run
+
+=head2 CPAN Minus
+
+B<*it doesn't work yet!*>
+
+  $ cpanm git@github.com:UCormorant/utig.pl.git
+
+  # and run utig.pl
+  $ utig run
 
 =head1 FEATURES
 
@@ -969,6 +1002,10 @@ MySQLにログたくさんとるぞ！(いまうごいてないです)
 Follow, unfollow, direct message, block, list, account の操作？そんなもんねぇ！
 (いつか対応予定です)
 
+=item *
+
+設定は C<$HOME/.utig> にみんな入ってる
+
 =back
 
 =head2 ACTION COMMANDS
@@ -995,11 +1032,15 @@ CTCP-actionにいろんなコマンドを実装してあります。
 
 =head1 DEPENDENCIES
 
+=head2 App::Uc::TwitterIrcGateway
+
 =over 2
 
 =item L<perl> >= 5.14
 
-=item L<opts>
+=item Uc::IrcGateway L<https://github.com/UCormorant/p5-uc-ircgateway>
+
+=item Uc::Model::Twitter L<https://github.com/UCormorant/p5-model-twitter>
 
 =item L<Net::Twitter::Lite>
 
@@ -1011,11 +1052,23 @@ CTCP-actionにいろんなコマンドを実装してあります。
 
 =item L<Config::Pit>
 
-=item L<DateTime::Format::HTTP>
-
 =item L<DateTime::Format::DateParse>
 
 =item L<HTML::Entities>
+
+=item L<namespace::clean>
+
+=back
+
+=head2 utig.pl
+
+=over 2
+
+=item L<Data::Lock>
+
+=item L<Smart::Options>
+
+=item L<Term::ReadKey>
 
 =back
 

@@ -1,0 +1,12 @@
+[submodule "extlib/p5-uc-ircgateway"]
+	path = extlib/p5-uc-ircgateway
+	url = git@github.com:UCormorant/p5-uc-ircgateway.git
+[submodule "extlib/p5-uc-model-twitter"]
+	path = extlib/p5-uc-model-twitter
+	url = git@github.com:UCormorant/p5-uc-model-twitter.git
+[submodule "extlib/p5-text-inflatedsprintf"]
+	path = extlib/p5-text-inflatedsprintf
+	url = git@github.com:UCormorant/p5-text-inflatedsprintf.git
+[submodule "extlib/p5-teng-plugin-dbic-resultset"]
+	path = extlib/p5-teng-plugin-dbic-resultset
+	url = git@github.com:UCormorant/p5-teng-plugin-dbic-resultset.git
