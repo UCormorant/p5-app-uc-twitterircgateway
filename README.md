@@ -7,7 +7,6 @@ App::Uc::TwitterIrcGateway - Twitter IRC Gateway of me by me for me
 ## Configure consumer key that utig.pl uses
 
     $ script/utig.pl configure
-    
 
     input Twitter consumer key:
     input Twitter consumer secret:
