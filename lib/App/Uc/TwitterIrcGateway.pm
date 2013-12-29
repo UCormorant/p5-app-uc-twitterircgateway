@@ -909,7 +909,7 @@ App::Uc::TwitterIrcGateway - Twitter IRC Gateway of me by me for me
 
 =head2 Start twitter irc gateway server
 
-  $ perl utig.pl
+  $ utig --host 0.0.0.0 --port 16668
 
 =head2 Login utig.pl server
 
@@ -955,29 +955,6 @@ UserStream を使用して閲覧するので発言が即座に流れてくるぞ
 
 コマンドと自前で作った TypableMap が快適な Twitter Life をサポートするぞ！
 
-=over 2
-
-コマンドは
-
-  my @action_command_info = (qq|action commands:|
-  ,  qq|/me mention (or me): fetch mentions|
-  ,  qq|/me reply (or re) <tid> <text>: reply to a <tid> tweet|
-  ,  qq|/me favorite (or f, fav) +<tid>: add <tid> tweets to favorites|
-  ,  qq|/me unfavorite (or unf, unfav) +<tid>: remove <tid> tweets from favorites|
-  ,  qq|/me retweet (or rt) +<tid>: retweet <tid> tweets|
-  ,  qq|/me quotetweet (or qt, qw) <tid> <text>: quotetweet a <tid> tweet, like "<text> QT \@tid_user: tid_tweet"|
-  ,  qq|/me delete (or del, oops) *<tid>: delete your <tid> tweets. if unset <tid>, delete your last tweet|
-  ,  qq|/me list (or li) <screen_name>: list <screen_name>'s recent 20 tweets|
-  ,  qq|/me information (or in, info) +<tid>: show <tid> tweets information. e.g. retweet_count, has conversation, created_at|
-  ,  qq|/me conversation (or co) <tid>: show <tid> tweets conversation|
-  ,  qq|/me ratelimit (or rate, limit): show remaining api hit counts|
-  ,  qq|/me ngword (or ng) <text>: set/delete a NG word. if unset <text>, show all NG words|
-  );
-
-こんなかんじだ！
-
-=back
-
 =item *
 
 Lists 対応。ただしリストに入れていてもフォローしてない人の発言は流れてこないぞ！
@@ -985,7 +962,7 @@ Lists 対応。ただしリストに入れていてもフォローしてない�
 
 =item *
 
-MySQLにログたくさんとるぞ！
+MySQLにログたくさんとるぞ！(いまうごいてないです)
 
 =item *
 
@@ -993,6 +970,28 @@ Follow, unfollow, direct message, block, list, account の操作？そんなも�
 (いつか対応予定です)
 
 =back
+
+=head2 ACTION COMMANDS
+
+CTCP-actionにいろんなコマンドを実装してあります。
+
+  /me *command* *args*
+
+上記のような感じで使います。
+
+  /me mention (or me): fetch mentions.
+  /me reply (or re) <tid> <text>: reply to a <tid> tweet.
+  /me favorite (or f, fav) +<tid>: add <tid> tweets to favorites.
+  /me unfavorite (or unf, unfav) +<tid>: remove <tid> tweets from favorites.
+  /me retweet (or rt) +<tid>: retweet <tid> tweets.
+  /me quotetweet (or qt, qw) <tid> <text>: quotetweet a <tid> tweet, like "<text> QT \@tid_user: tid_tweet".
+  /me delete (or del, oops) *<tid>: delete your <tid> tweets. if unset <tid>, delete your last tweet.
+  /me list (or li) <screen_name>: list <screen_name>'s recent 20 tweets.
+  /me information (or in, info) +<tid>: show <tid> tweets information. e.g. retweet_count, has conversation, created_at.
+  /me conversation (or co) <tid>: show <tid> tweets conversation.
+  /me ratelimit (or rate, limit): show remaining api hit counts.
+
+だいたいこんな感じ！
 
 =head1 DEPENDENCIES
 
