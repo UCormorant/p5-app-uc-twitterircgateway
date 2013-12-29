@@ -2,6 +2,21 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v1.0.1 2013-12-29T21:05:29Z
+
+    - bugfix: fatal on twitter_configure when invalid consumer key is given.
+
+    - utig.pl: add sub command 'configure' and 'run'
+
+        - configure: update and verify consumer key that utig.pl uses.
+        - run: run utig.pl(irc gateway server)
+
+    - update documents
+
+    - SYNOPSIS and INSTALLATION are update to v1.0.1
+
+    - update cpanfile
+
 v1.0.0 2013-12-28T23:44:11Z
 
     - version 1.0.0
