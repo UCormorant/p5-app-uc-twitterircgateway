@@ -82,13 +82,17 @@ CTCP-actionにいろんなコマンドを実装してあります。
 
 だいたいこんな感じ！
 
+    [SPACE] f <tid>...
+
+みたいに、先頭に空白入れると action として認識するのでいちいち `/me ` とか打たなくてもへいきです
+
 # DEPENDENCIES
 
 ## App::Uc::TwitterIrcGateway
 
 - [perl](http://search.cpan.org/perldoc?perl) >= 5.14
 - Uc::IrcGateway [https://github.com/UCormorant/p5-uc-ircgateway](https://github.com/UCormorant/p5-uc-ircgateway)
-- Uc::Model::Twitter [https://github.com/UCormorant/p5-model-twitter](https://github.com/UCormorant/p5-model-twitter)
+- Uc::Model::Twitter [https://github.com/UCormorant/p5-uc-model-twitter](https://github.com/UCormorant/p5-uc-model-twitter)
 - [Net::Twitter::Lite](http://search.cpan.org/perldoc?Net::Twitter::Lite)
 - [AnyEvent::Twitter](http://search.cpan.org/perldoc?AnyEvent::Twitter)
 - [AnyEvent::Twitter::Stream](http://search.cpan.org/perldoc?AnyEvent::Twitter::Stream)
