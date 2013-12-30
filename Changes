@@ -2,6 +2,21 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v1.1.0 2013-12-30T22:05:18Z
+
+    - add feature tweet2db
+
+        - with option '--tweet2db', utig.pl collects streaming to MySQL.
+          before using this option, you should command following:
+
+            echo CREATE DATABASE twitter DEFAULT CHARACTER SET utf8mb4 | mysql -u root -p
+
+    - bugfix: these DBI options are not enabled in Component/Tweet.pm:
+
+        - RaiseError, PrintError, AutoCommit
+
+    - bugfix: {user_id}.tweet.sqlite gets fat endlessly.
+
 v1.0.1 2013-12-29T21:05:29Z
 
     - bugfix: fatal on twitter_configure when invalid consumer key is given.
