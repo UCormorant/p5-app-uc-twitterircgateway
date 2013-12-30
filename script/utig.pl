@@ -168,6 +168,9 @@ MySQLにログ取りまくる機能復旧。
 事前に "CREATE DATABASE twitter;" しておく必要あり。
 SQLite対応もできなくはないけどたぶんやらない。
 
+タイマーイベントについても
+勝手にhandleにオプション生やして適当にやれよと思い始めた
+
 TODO:
     on_event と MySQL の連携
     Twitterアカウントのデータ更新

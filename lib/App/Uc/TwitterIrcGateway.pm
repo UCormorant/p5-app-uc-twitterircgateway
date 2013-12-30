@@ -167,7 +167,7 @@ sub new {
             module => 'Log::Tweet2DB',
             config => +{
                 connect_info => [
-                    'dbi:mysql:twitter', , , +{
+                    'dbi:mysql:twitter', undef, undef, +{
                     mysql_enable_utf8 => 1,
                     on_connect_do     => ['set names utf8mb4'],
                 }],

@@ -6,6 +6,7 @@ use Carp qw(croak);
 use DBI qw(:sql_types);
 use DBD::SQLite 1.027;
 use Path::Class qw(file);
+use AnyEvent;
 
 my %CREATE_TABLE_SQL = (
     tweet            => q{
@@ -23,14 +24,21 @@ sub setup_dbh {
     my $db = file($handle->ircd->app_dir, sprintf "%s.tweet.sql", $handle->self->login);
     my $exists_db = -e $db;
     $handle->{tweet_dbh} = DBI->connect(
-        'dbi:SQLite:'.$db,,,
+        'dbi:SQLite:'.$db,undef,undef,
         +{ RaiseError => 1, PrintError => 0, AutoCommit => 1, sqlite_unicode => 1 }
     );
-    $handle->{tweet_dbh}{sqlite_unicode} = 1;
     setup_database($handle) if not $exists_db;
 
     $handle->{tweet_dbh}->do("DELETE FROM tweet");
     $handle->{tweet_dbh}->do("VACUUM");
+
+    $handle->{tweet_db_guard} = AnyEvent->timer(after => 6*3600, interval => 6*3600, cb => sub {
+        return unless $handle->{tmap};
+        $handle->{tweet_dbh}->do(sprintf(
+            q{DELETE FROM tweet WHERE id NOT IN (%s)},
+            join(',', map { sprintf "'%s'", s/'/\\'/gr; } @{$handle->{timeline}}),
+        ));
+    });
 }
 
 sub setup_database {

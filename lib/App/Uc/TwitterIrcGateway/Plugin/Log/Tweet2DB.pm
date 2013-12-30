@@ -32,11 +32,6 @@ sub init {
         $class->log(undef, info => sprintf "load plugin: %s", ref $plugin);
         undef $w;
     });
-
-    $plugin->{dev_guard} = AnyEvent->timer(after => 10, interval => 2, cb => sub {
-        my $sts = $plugin->{schema}->single('status', {},{ order_by => 'id desc'});
-        $class->log(undef, info => sprintf "status text: %s", $sts->text) if $sts;
-    });
 }
 
 sub tweet2db :LogLevel('tweet2db') {
@@ -93,10 +88,10 @@ sub commit {
     eval {
         my $txn = $plugin->{schema}->txn_scope;
         while (my $q = shift @{$plugin->{queue}}) {
-#            $plugin->{schema}->find_or_create_status(
-#                $q->{tweet},
-#                { user_id => $q->{user}->login, ignore_unmarking => 1 },
-#            );
+            $plugin->{schema}->find_or_create_status(
+                $q->{tweet},
+                { user_id => $q->{user}->login, ignore_unmarking => 1 },
+            );
         }
         $txn->commit;
     };
