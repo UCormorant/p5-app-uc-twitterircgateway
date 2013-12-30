@@ -114,8 +114,8 @@ sub action {
 
             for my $tid (@params) {
                 $self->tid_event($handle, 'favorites/create', $tid, target => $target, cb => sub {
-#                    my ($header, $res, $reason) = @_;
-#                    $self->logger->remark( $handle, { tid => $tid, favorited => 1 } ) if $res;
+                    my ($header, $res, $reason) = @_;
+                    $self->log($handle, remark2db => { tid => $tid, favorited => 1 } ) if $res;
                 });
             }
         };
@@ -127,8 +127,8 @@ sub action {
 
             for my $tid (@params) {
                 $self->tid_event($handle, 'favorites/destroy', $tid, target => $target, cb => sub {
-#                    my ($header, $res, $reason) = @_;
-#                    $self->logger->remark( $handle, { tid => $tid, favorited => 0 } ) if $res;
+                    my ($header, $res, $reason) = @_;
+                    $self->log($handle, remark2db => { tid => $tid, favorited => 0 } ) if $res;
                 });
             }
         };
@@ -140,8 +140,8 @@ sub action {
 
             for my $tid (@params) {
                 $self->tid_event($handle, 'statuses/retweet/:id', $tid, target => $target, cb => sub {
-#                    my ($header, $res, $reason) = @_;
-#                    $self->logger->remark( $handle, { tid => $tid, retweeted => 1 } ) if $res;
+                    my ($header, $res, $reason) = @_;
+                    $self->log($handle, remark2db => { tid => $tid, retweeted => 1 } ) if $res;
                 });
             }
         };
@@ -184,11 +184,17 @@ sub action {
     elsif ($command =~ /$action_command->{delete}/) {
         my $delete = sub {
             my @tids = @params;
-               @tids = $handle->get_channels($handle->options->{stream})->topic =~ /\[(.+?)\]$/ if not scalar @tids;
+            if (not scalar @tids) {
+                my $topic = $handle->get_channels($handle->options->{stream})->topic // '';
+                if (my @match = $topic =~ /\[(.+)\]/g) { @tids = pop @match; }
+            }
 
             return if not scalar @tids;
             for my $tid (@tids) {
-                $self->tid_event($handle, 'statuses/destroy/:id', $tid, target => $target);
+                $self->tid_event($handle, 'statuses/destroy/:id', $tid, target => $target, cb => sub {
+                    my ($header, $res, $reason) = @_;
+                    $self->log($handle, remark2db => { tid => $tid, retweeted => 0 } ) if $res;
+                });
             }
         };
         $delete->();

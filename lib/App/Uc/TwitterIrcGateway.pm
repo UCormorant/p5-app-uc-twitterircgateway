@@ -1,4 +1,4 @@
-package App::Uc::TwitterIrcGateway v1.0.1;
+package App::Uc::TwitterIrcGateway v1.1.0;
 
 use 5.014;
 use warnings;
@@ -8,7 +8,7 @@ use parent 'Uc::IrcGateway';
 use Uc::IrcGateway::Common;
 use Uc::IrcGateway::TypableMap;
 __PACKAGE__->load_components(qw/CustomRegisterUser Tweet/);
-__PACKAGE__->load_plugins(qw/DefaultSet Irc::Pin Log::Tweet2DB/);
+__PACKAGE__->load_plugins(qw/DefaultSet Irc::Pin/);
 
 use Uc::Model::Twitter;
 use Net::Twitter::Lite::WithAPIv1_1;
@@ -155,9 +155,25 @@ sub new {
     my $consumer_key    = delete $args{consumer_key};
     my $consumer_secret = delete $args{consumer_secret};
 
+    my $tweet2db = delete $args{tweet2db} // 0;
+
     # 初期値上書き
     $args{port}        //= 16668;
     $args{gatewayname} //= '*utigd';
+
+    # プラグイン設定
+    if ($tweet2db) {
+        __PACKAGE__->load_plugins({
+            module => 'Log::Tweet2DB',
+            config => +{
+                connect_info => [
+                    'dbi:mysql:twitter', , , +{
+                    mysql_enable_utf8 => 1,
+                    on_connect_do     => ['set names utf8mb4'],
+                }],
+            }
+        });
+    }
 
     my $self = $class->SUPER::new(\%args);
 
@@ -286,7 +302,7 @@ sub process_tweet {
 
     my $raw_tweet = clone $tweet;
     $self->set_tweet($handle, $raw_tweet);
-    $self->log($handle, tweet2db => { tweet => $raw_tweet, user => $handle->self } );
+    $self->log($handle, tweet2db => $raw_tweet );
 
     validate_tweet($tweet);
 
@@ -377,6 +393,7 @@ sub process_tweet {
     elsif ($nick eq $handle->self->nick) {
         $handle->self($user);
         $stream_channel->topic("$text [$tmap]");
+        $stream_channel->update;
         $self->send_cmd( $handle, $user, 'TOPIC',  $stream_channel_name,   "$text [$tmap]$time" );
         $self->send_cmd( $handle, $user, 'NOTICE', $activity_channel_name, "$text [$tmap]$time" );
         my $lists_include_own = $handle->get_state('lists_include_own');

@@ -37,9 +37,10 @@ my $opt = Smart::Options->new->usage("Usage: $0 [configure or run]")
 ->subcmd( configure => Smart::Options->new->usage($usage_configure) )
 ->subcmd( run       => Smart::Options->new->usage("Usage: $0 run")->options(
     host      => { type => 'Str',  default => '127.0.0.1', describe => 'bind host' },
-    port      => { type => 'Int',  default => '16668',   , describe => 'listen port' },
-    time_zone => { type => 'Str',  default => 'local',   , describe => 'server time zone (ex. Asia/Tokyo)' },
-    debug     => { type => 'Bool', default => 0,         , describe => 'debug mode' },
+    port      => { type => 'Int',  default => '16668',     describe => 'listen port' },
+    time_zone => { type => 'Str',  default => 'local',     describe => 'server time zone (ex. Asia/Tokyo)' },
+    tweet2db  => { type => 'Bool', default => 0,           describe => 'load Tweet2DB plugin' },
+    debug     => { type => 'Bool', default => 0,           describe => 'debug mode' },
 ) );
 my $given = $opt->parse(@ARGV);
 
@@ -94,6 +95,8 @@ sub run {
 
         consumer_key    => $config->{consumer_key},
         consumer_secret => $config->{consumer_secret},
+
+        tweet2db => $option->{tweet2db},
     );
 
     $ircd->run();
@@ -153,9 +156,21 @@ pit_getあるけど簡単のためにutigコマンドにconsumer_keyを設定す
 書いたところでgithubにしかないモジュール使ってるからインストール出来ないことに
 気づいたのでこけるやつはextlibにsubmoduleとして追加した
 
+--------------------------------------------------------------------------------
+
+Version 1.1.0
+
+MySQLにログ取りまくる機能復旧。
+
+    $utig run --tweet2db
+
+でローカルのMySQLのtwitterデータベースにログ取る。
+事前に "CREATE DATABASE twitter;" しておく必要あり。
+SQLite対応もできなくはないけどたぶんやらない。
+
 TODO:
     on_event と MySQL の連携
     Twitterアカウントのデータ更新
     process_event の復旧
-    PODの内容検討
     いい感じに継承する方法の検討
+    リツイート情報が消えてない気がする
