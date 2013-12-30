@@ -7,8 +7,8 @@ use utf8;
 use parent 'Uc::IrcGateway';
 use Uc::IrcGateway::Common;
 use Uc::IrcGateway::TypableMap;
-__PACKAGE__->load_components(qw/Tweet/);
-__PACKAGE__->load_plugins(qw/DefaultSet CustomRegisterUser Irc::Pin/);
+__PACKAGE__->load_components(qw/CustomRegisterUser Tweet/);
+__PACKAGE__->load_plugins(qw/DefaultSet Irc::Pin Log::Tweet2DB/);
 
 use Uc::Model::Twitter;
 use Net::Twitter::Lite::WithAPIv1_1;
@@ -1029,6 +1029,10 @@ CTCP-actionにいろんなコマンドを実装してあります。
   /me ratelimit (or rate, limit): show remaining api hit counts.
 
 だいたいこんな感じ！
+
+  [SPACE] f <tid>...
+
+みたいに、先頭に空白入れると action として認識するのでいちいち C</me > とか打たなくてもへいきです
 
 =head1 DEPENDENCIES
 

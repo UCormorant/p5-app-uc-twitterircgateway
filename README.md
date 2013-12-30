@@ -82,6 +82,10 @@ CTCP-actionにいろんなコマンドを実装してあります。
 
 だいたいこんな感じ！
 
+    [SPACE] f <tid>...
+
+みたいに、先頭に空白入れると action として認識するのでいちいち `/me ` とか打たなくてもへいきです
+
 # DEPENDENCIES
 
 ## App::Uc::TwitterIrcGateway
