@@ -43,19 +43,28 @@
       },
       "runtime" : {
          "requires" : {
+            "AnyEvent" : "7.04",
+            "AnyEvent::IRC" : "0.6",
             "AnyEvent::Twitter" : "0",
             "AnyEvent::Twitter::Stream" : "0",
+            "Class::Accessor::Lite" : "0",
+            "Class::Component" : "0.17",
             "Clone" : "0",
             "Config::Pit" : "0",
+            "DBD::SQLite" : "1.027",
             "Data::Lock" : "0",
             "DateTime::Format::DateParse" : "0",
+            "DateTime::Format::HTTP" : "0",
+            "DateTime::Format::MySQL" : "0",
             "HTML::Entities" : "0",
+            "JSON" : "0",
+            "Log::Dispatch" : "2.36",
             "Net::Twitter::Lite" : "0",
-            "Path::Class" : "0",
+            "Path::Class" : "0.29",
             "Smart::Options" : "0",
+            "Teng" : "0.17",
             "Term::ReadKey" : "0",
-            "Uc::IrcGateway" : "0",
-            "Uc::Model::Twitter" : "0",
+            "YAML" : "0",
             "namespace::clean" : "0",
             "perl" : "5.014"
          }
@@ -78,7 +87,7 @@
          "web" : "https://github.com/UCormorant/p5-app-uc-twitterircgateway"
       }
    },
-   "version" : "v1.1.0",
+   "version" : "v1.1.1",
    "x_contributors" : [
       "U=Cormorant <u@chimata.org>"
    ]

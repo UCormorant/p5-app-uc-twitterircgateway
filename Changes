@@ -2,6 +2,14 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v1.1.1 2013-12-31T01:20:59Z
+
+    - update cpanfile:
+
+        - add dependencies of extlib
+
+    - update POD: INSTALLATION
+
 v1.1.0 2013-12-30T22:05:18Z
 
     - add feature tweet2db

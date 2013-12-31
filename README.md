@@ -33,10 +33,12 @@ utig.pl は userstream の監視プログラムに毛が生えた程度のTwitte
 ## GitHub Checkout
 
     $ git clone git@github.com:UCormorant/utig.pl.git
+    $ cd utig.pl/
+    $ git submodule update --init
+    $ cpanm --installdeps .
 
     # and run utig.pl
 
-    $ cd utig.pl
     $ perl script/utig.pl run
 
 ## CPAN Minus
