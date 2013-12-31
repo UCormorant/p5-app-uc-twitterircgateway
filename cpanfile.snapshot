@@ -1,16 +1,16 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  AnyEvent-7.05
-    pathname: M/ML/MLEHMANN/AnyEvent-7.05.tar.gz
+  AnyEvent-7.07
+    pathname: M/ML/MLEHMANN/AnyEvent-7.07.tar.gz
     provides:
       AE undef
       AE::Log::COLLECT undef
       AE::Log::FILTER undef
       AE::Log::LOG undef
-      AnyEvent 7.05
-      AnyEvent::Base 7.05
-      AnyEvent::CondVar 7.05
-      AnyEvent::CondVar::Base 7.05
+      AnyEvent 7.07
+      AnyEvent::Base 7.07
+      AnyEvent::CondVar 7.07
+      AnyEvent::CondVar::Base 7.07
       AnyEvent::DNS undef
       AnyEvent::Debug undef
       AnyEvent::Debug::Backtrace undef
@@ -100,24 +100,62 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.023
       URI 0
       perl 5.008001
-  B-Keywords-1.13
-    pathname: R/RU/RURBAN/B-Keywords-1.13.tar.gz
+  B-Hooks-EndOfScope-0.12
+    pathname: B/BO/BOBTFISH/B-Hooks-EndOfScope-0.12.tar.gz
     provides:
-      B::Keywords 1.13
+      B::Hooks::EndOfScope 0.12
+      B::Hooks::EndOfScope::PP 0.12
+      B::Hooks::EndOfScope::XS 0.12
     requirements:
-      B 0
-      ExtUtils::MakeMaker 0
-  Carp-1.32
-    pathname: Z/ZE/ZEFRAM/Carp-1.32.tar.gz
+      ExtUtils::CBuilder 0.26
+      ExtUtils::MakeMaker 6.30
+      Module::Implementation 0.05
+      Module::Runtime 0.012
+      Sub::Exporter::Progressive 0.001006
+      Test::More 0.88
+      Variable::Magic 0.48
+  CPAN-Meta-2.133380
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.133380.tar.gz
     provides:
-      Carp 1.32
-      Carp::Heavy 1.32
+      CPAN::Meta 2.133380
+      CPAN::Meta::Converter 2.133380
+      CPAN::Meta::Feature 2.133380
+      CPAN::Meta::History 2.133380
+      CPAN::Meta::Prereqs 2.133380
+      CPAN::Meta::Spec 2.133380
+      CPAN::Meta::Validator 2.133380
     requirements:
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      IPC::Open3 1.0103
-      Test::More 0
+      CPAN::Meta::Requirements 2.121
+      CPAN::Meta::YAML 0.008
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      JSON::PP 2.27200
+      List::Util 1.33
+      Parse::CPAN::Meta 1.4403
+      Scalar::Util 0
       strict 0
+      version 0.88
+      warnings 0
+  CPAN-Meta-Requirements-2.125
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.125.tar.gz
+    provides:
+      CPAN::Meta::Requirements 2.125
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      Scalar::Util 0
+      strict 0
+      version 0.77
+      warnings 0
+  CPAN-Meta-YAML-0.010
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-YAML-0.010.tar.gz
+    provides:
+      CPAN::Meta::YAML 0.010
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.17
+      Scalar::Util 0
       warnings 0
   Carp-Clan-6.04
     pathname: S/ST/STBEY/Carp-Clan-6.04.tar.gz
@@ -174,12 +212,9 @@ DISTRIBUTIONS
       Class::Accessor::Fast 0
       Class::Data::Inheritable 0
       Class::Inspector 0
-      Encode 0
       ExtUtils::MakeMaker 0
-      Term::ANSIColor 0
       Test::More 0
       UNIVERSAL::require 0
-      YAML 0
   Class-Data-Inheritable-0.08
     pathname: T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
     provides:
@@ -233,25 +268,30 @@ DISTRIBUTIONS
       strict 0
       version 0
       warnings 0
+  Class-Method-Modifiers-2.09
+    pathname: E/ET/ETHER/Class-Method-Modifiers-2.09.tar.gz
+    provides:
+      Class::Method::Modifiers 2.09
+    requirements:
+      B 0
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      Module::Build::Tiny 0.030
+      base 0
+      perl 5.006
+      strict 0
+      warnings 0
   Class-Singleton-1.4
     pathname: A/AB/ABW/Class-Singleton-1.4.tar.gz
     provides:
       Class::Singleton 1.4
     requirements:
       ExtUtils::MakeMaker 0
-  Class-Tiny-0.012
-    pathname: D/DA/DAGOLDEN/Class-Tiny-0.012.tar.gz
+  Clone-0.36
+    pathname: G/GA/GARU/Clone-0.36.tar.gz
     provides:
-      Class::Tiny 0.012
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      strict 0
-      warnings 0
-  Clone-0.35
-    pathname: G/GA/GARU/Clone-0.35.tar.gz
-    provides:
-      Clone 0.35
+      Clone 0.36
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -269,33 +309,6 @@ DISTRIBUTIONS
       Path::Class 0
       Test::More 0
       YAML::Syck 1
-  Config-Tiny-2.19
-    pathname: R/RS/RSAVAGE/Config-Tiny-2.19.tgz
-    provides:
-      Config::Tiny 2.19
-    requirements:
-      File::Spec 3.4
-      File::Temp 0.2301
-      Module::Build 0.38
-      Test::More 0.47
-      UNIVERSAL 0
-      perl v5.8.1
-      strict 0
-      utf8 0
-      vars 0
-  Const-Fast-0.014
-    pathname: L/LE/LEONT/Const-Fast-0.014.tar.gz
-    provides:
-      Const::Fast 0.014
-    requirements:
-      Carp 0
-      Module::Build::Tiny 0.021
-      Scalar::Util 0
-      Storable 0
-      Sub::Exporter::Progressive 0.001007
-      perl 5.008
-      strict 0
-      warnings 0
   Crypt-SSLeay-0.64
     pathname: N/NA/NANIS/Crypt-SSLeay-0.64.tar.gz
     provides:
@@ -322,10 +335,11 @@ DISTRIBUTIONS
     requirements:
       DBI 1.57
       ExtUtils::MakeMaker 6.48
-      File::Spec 0.82
+      File::Spec 3.27
       Test::Builder 0.86
       Test::More 0.47
       Tie::Hash 0
+      Win32 0.30
       perl 5.006
   DBI-1.630
     pathname: T/TI/TIMB/DBI-1.630.tar.gz
@@ -421,6 +435,7 @@ DISTRIBUTIONS
       DBI::common 1.630
     requirements:
       ExtUtils::MakeMaker 6.48
+      File::Spec 3.31
       Test::Simple 0.90
       perl 5.008
   DBIx-Inspector-0.12
@@ -458,20 +473,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.36
       Test::More 0.96
       Try::Tiny 0
-  Data-Difflet-0.09
-    pathname: T/TO/TOKUHIROM/Data-Difflet-0.09.tar.gz
-    provides:
-      Data::Difflet 0.09
-      Test::Difflet undef
-    requirements:
-      CPAN::Meta 0
-      CPAN::Meta::Prereqs 0
-      ExtUtils::CBuilder 0
-      Module::Build 0.38
-      Term::ANSIColor 0
-      Test::More 0.96
-      parent 0
-      perl 5.008008
   Data-Lock-1.02
     pathname: D/DA/DANKOGAI/Data-Lock-1.02.tar.gz
     provides:
@@ -480,10 +481,10 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Data-OptList-0.108
-    pathname: R/RJ/RJBS/Data-OptList-0.108.tar.gz
+  Data-OptList-0.109
+    pathname: R/RJ/RJBS/Data-OptList-0.109.tar.gz
     provides:
-      Data::OptList 0.108
+      Data::OptList 0.109
     requirements:
       ExtUtils::MakeMaker 6.30
       List::Util 0
@@ -517,16 +518,16 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.42
       Test::More 0.94
       perl 5.008001
-  DateTime-1.03
-    pathname: D/DR/DROLSKY/DateTime-1.03.tar.gz
+  DateTime-1.05
+    pathname: D/DR/DROLSKY/DateTime-1.05.tar.gz
     provides:
-      DateTime 1.03
-      DateTime::Duration 1.03
-      DateTime::Helpers 1.03
-      DateTime::Infinite 1.03
-      DateTime::Infinite::Future 1.03
-      DateTime::Infinite::Past 1.03
-      DateTime::LeapSecond 1.03
+      DateTime 1.05
+      DateTime::Duration 1.05
+      DateTime::Helpers 1.05
+      DateTime::Infinite 1.05
+      DateTime::Infinite::Future 1.05
+      DateTime::Infinite::Past 1.05
+      DateTime::LeapSecond 1.05
       inc::MyModuleBuild undef
     requirements:
       Carp 0
@@ -1510,40 +1511,11 @@ DISTRIBUTIONS
       File::Spec 0
       List::Util 0
       Params::Validate 0.72
+      Win32::TieRegistry 0
       constant 0
       parent 0
       strict 0
       vars 0
-      warnings 0
-  Devel-FindPerl-0.009
-    pathname: L/LE/LEONT/Devel-FindPerl-0.009.tar.gz
-    provides:
-      Devel::FindPerl 0.009
-    requirements:
-      Carp 0
-      Cwd 0
-      Exporter 5.57
-      ExtUtils::MakeMaker 6.30
-      File::Basename 0
-      File::Spec::Functions 0
-      IPC::Open2 0
-      Scalar::Util 0
-      strict 0
-      warnings 0
-  Devel-StackTrace-1.30
-    pathname: D/DR/DROLSKY/Devel-StackTrace-1.30.tar.gz
-    provides:
-      Devel::StackTrace 1.30
-      Devel::StackTrace::Frame 1.30
-    requirements:
-      ExtUtils::MakeMaker 6.30
-      File::Spec 0
-      Scalar::Util 0
-      Test::More 0.88
-      base 0
-      bytes 0
-      overload 0
-      strict 0
       warnings 0
   Digest-HMAC-1.03
     pathname: G/GA/GAAS/Digest-HMAC-1.03.tar.gz
@@ -1556,13 +1528,6 @@ DISTRIBUTIONS
       Digest::SHA 1
       ExtUtils::MakeMaker 0
       perl 5.004
-  Digest-SHA-5.85
-    pathname: M/MS/MSHELOR/Digest-SHA-5.85.tar.gz
-    provides:
-      Digest::SHA 5.85
-    requirements:
-      ExtUtils::MakeMaker 0
-      perl 5.003
   Digest-SHA1-2.13
     pathname: G/GA/GAAS/Digest-SHA1-2.13.tar.gz
     provides:
@@ -1571,64 +1536,17 @@ DISTRIBUTIONS
       Digest::base 1.00
       ExtUtils::MakeMaker 0
       perl 5.004
-  Dist-CheckConflicts-0.09
-    pathname: D/DO/DOY/Dist-CheckConflicts-0.09.tar.gz
+  Dist-CheckConflicts-0.10
+    pathname: D/DO/DOY/Dist-CheckConflicts-0.10.tar.gz
     provides:
-      Bar 0.02
-      Bar::Bar 0.01
-      Bar::Bar::Bad 0.01
-      Bar::Bar::Good 0.02
-      Bar::Baz 0.02
-      Bar::Baz::Bad 0.01
-      Bar::Baz::Good 0.02
-      Bar::Conflicts undef
-      Bar::Conflicts2 undef
-      Bar::Conflicts3 undef
-      Bar::Conflicts::Bad undef
-      Bar::Conflicts::Bad2 undef
-      Bar::Conflicts::Bad3 undef
-      Bar::Conflicts::Good undef
-      Bar::Conflicts::Good2 undef
-      Bar::Conflicts::Good3 undef
-      Bar::Foo 0.01
-      Bar::Foo::Bad 0.01
-      Bar::Foo::Good 0.02
-      Bar::Quux 0.02
-      Bar::Quux::Bad 0.01
-      Bar::Quux::Good 0.02
-      Bar::Three 0.02
-      Bar::Two 0.02
-      Broken undef
-      Dist::CheckConflicts 0.09
-      Foo undef
-      Foo::Bar 0.01
-      Foo::Baz 0.02
-      Foo::Conflicts undef
-      Foo::Conflicts2 undef
-      Foo::Conflicts::Bad undef
-      Foo::Conflicts::Broken undef
-      Foo::Conflicts::Good undef
-      Foo::Foo 0.01
-      Foo::Quux 0.02
-      Foo::Thing 0.02
-      Foo::Three 0.02
-      Foo::Two 0.02
+      Dist::CheckConflicts 0.10
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::MakeMaker 6.30
       List::MoreUtils 0.12
-      Module::Runtime 0
+      Module::Runtime 0.009
       base 0
-      strict 0
-      warnings 0
-  Email-Address-1.900
-    pathname: R/RJ/RJBS/Email-Address-1.900.tar.gz
-    provides:
-      Email::Address 1.900
-    requirements:
-      ExtUtils::MakeMaker 6.30
-      overload 0
       strict 0
       warnings 0
   Encode-Locale-1.03
@@ -1641,23 +1559,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test 0
       perl 5.008
-  Exception-Class-1.37
-    pathname: D/DR/DROLSKY/Exception-Class-1.37.tar.gz
-    provides:
-      Exception::Class 1.37
-      Exception::Class::Base 1.37
-    requirements:
-      Class::Data::Inheritable 0.02
-      Devel::StackTrace 1.20
-      ExtUtils::MakeMaker 6.30
-      File::Spec 0
-      Scalar::Util 0
-      Test::More 0.88
-      base 0
-      overload 0
-      strict 0
-      vars 0
-      warnings 0
   ExtUtils-Config-0.007
     pathname: L/LE/LEONT/ExtUtils-Config-0.007.tar.gz
     provides:
@@ -1701,47 +1602,6 @@ DISTRIBUTIONS
       File::Spec 0
       strict 0
       warnings 0
-  ExtUtils-MakeMaker-6.82
-    pathname: B/BI/BINGOS/ExtUtils-MakeMaker-6.82.tar.gz
-    provides:
-      DynaLoader 6.82
-      ExtUtils::Command::MM 6.82
-      ExtUtils::Liblist 6.82
-      ExtUtils::Liblist::Kid 6.82
-      ExtUtils::MM 6.82
-      ExtUtils::MM_AIX 6.82
-      ExtUtils::MM_Any 6.82
-      ExtUtils::MM_BeOS 6.82
-      ExtUtils::MM_Cygwin 6.82
-      ExtUtils::MM_DOS 6.82
-      ExtUtils::MM_Darwin 6.82
-      ExtUtils::MM_MacOS 6.82
-      ExtUtils::MM_NW5 6.82
-      ExtUtils::MM_OS2 6.82
-      ExtUtils::MM_QNX 6.82
-      ExtUtils::MM_UWIN 6.82
-      ExtUtils::MM_Unix 6.82
-      ExtUtils::MM_VMS 6.82
-      ExtUtils::MM_VOS 6.82
-      ExtUtils::MM_Win32 6.82
-      ExtUtils::MM_Win95 6.82
-      ExtUtils::MY 6.82
-      ExtUtils::MakeMaker 6.82
-      ExtUtils::MakeMaker::Config 6.82
-      ExtUtils::MakeMaker::_version 6.82
-      ExtUtils::Mkbootstrap 6.82
-      ExtUtils::Mksymlists 6.82
-      ExtUtils::testlib 6.82
-      MM 6.82
-      MY 6.82
-      in 6.82
-    requirements:
-      Data::Dumper 0
-      DirHandle 0
-      File::Basename 0
-      File::Spec 0.8
-      Pod::Man 0
-      perl 5.006
   File-HomeDir-1.00
     pathname: A/AD/ADAMK/File-HomeDir-1.00.tar.gz
     provides:
@@ -1765,6 +1625,7 @@ DISTRIBUTIONS
       File::Temp 0.19
       File::Which 0.05
       Test::More 0.47
+      Win32 0.31
       perl 5.00503
   File-Listing-6.04
     pathname: G/GA/GAAS/File-Listing-6.04.tar.gz
@@ -1779,60 +1640,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       HTTP::Date 6
       perl 5.006002
-  File-Next-1.12
-    pathname: P/PE/PETDANCE/File-Next-1.12.tar.gz
-    provides:
-      File::Next 1.12
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Spec 0
-      Test::More 0.88
-  File-Remove-1.52
-    pathname: A/AD/ADAMK/File-Remove-1.52.tar.gz
-    provides:
-      File::Remove 1.52
-    requirements:
-      Cwd 3.29
-      ExtUtils::MakeMaker 6.36
-      File::Spec 3.29
-      Test::More 0.42
-      perl 5.00503
-  File-ShareDir-1.03
-    pathname: A/AD/ADAMK/File-ShareDir-1.03.tar.gz
-    provides:
-      File::ShareDir 1.03
-    requirements:
-      Carp 0
-      Class::Inspector 1.12
-      ExtUtils::MakeMaker 6.42
-      File::Spec 0.80
-      Test::More 0.47
-      perl 5.005
-  File-ShareDir-Install-0.05
-    pathname: G/GW/GWYN/File-ShareDir-Install-0.05.tar.gz
-    provides:
-      File::ShareDir::Install 0.05
-    requirements:
-      ExtUtils::MakeMaker 6.11
-      File::Spec 0
-      IO::Dir 0
-  File-ShareDir-ProjectDistDir-0.5.2
-    pathname: K/KE/KENTNL/File-ShareDir-ProjectDistDir-0.5.2.tar.gz
-    provides:
-      File::ShareDir::ProjectDistDir 0.005002
-    requirements:
-      Carp 0
-      File::ShareDir 0
-      Module::Build 0.4007
-      Path::Class::Dir 0
-      Path::Class::File 0
-      Path::FindDev 0
-      Path::IsDev 0
-      Path::Tiny 0
-      Sub::Exporter 0
-      perl 5.006
-      strict 0
-      warnings 0
   File-Slurp-9999.19
     pathname: U/UR/URI/File-Slurp-9999.19.tar.gz
     provides:
@@ -1974,13 +1781,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       HTTP::Headers 6
       perl 5.008001
-  Hook-LexWrap-0.24
-    pathname: C/CH/CHORNY/Hook-LexWrap-0.24.tar.gz
-    provides:
-      Hook::LexWrap 0.24
-    requirements:
-      Test::More 0
-      perl 5.006
   IO-HTML-1.00
     pathname: C/CJ/CJM/IO-HTML-1.00.tar.gz
     provides:
@@ -1993,25 +1793,19 @@ DISTRIBUTIONS
       File::Temp 0
       Scalar::Util 0
       Test::More 0.88
-  IO-Socket-SSL-1.955
-    pathname: S/SU/SULLR/IO-Socket-SSL-1.955.tar.gz
+  IO-Socket-SSL-1.962
+    pathname: S/SU/SULLR/IO-Socket-SSL-1.962.tar.gz
     provides:
-      IO::Socket::SSL 1.955
+      IO::Socket::SSL 1.962
       IO::Socket::SSL::Intercept 1.93
-      IO::Socket::SSL::SSL_Context 1.955
-      IO::Socket::SSL::SSL_HANDLE 1.955
-      IO::Socket::SSL::Session_Cache 1.955
-      IO::Socket::SSL::Utils 0.01
+      IO::Socket::SSL::SSL_Context 1.962
+      IO::Socket::SSL::SSL_HANDLE 1.962
+      IO::Socket::SSL::Session_Cache 1.962
+      IO::Socket::SSL::Utils 0.02
     requirements:
       ExtUtils::MakeMaker 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  IO-String-1.08
-    pathname: G/GA/GAAS/IO-String-1.08.tar.gz
-    provides:
-      IO::String 1.08
-    requirements:
-      ExtUtils::MakeMaker 0
   IPC-Run3-0.046
     pathname: R/RJ/RJBS/IPC-Run3-0.046.tar.gz
     provides:
@@ -2020,6 +1814,7 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0.31
       Time::HiRes 0
+      Win32 0
   JSON-2.90
     pathname: M/MA/MAKAMAKA/JSON-2.90.tar.gz
     provides:
@@ -2048,14 +1843,6 @@ DISTRIBUTIONS
       Mozilla::CA 20110101
       Net::HTTPS 6
       perl 5.008001
-  Lingua-EN-Inflect-1.895
-    pathname: D/DC/DCONWAY/Lingua-EN-Inflect-1.895.tar.gz
-    provides:
-      Lingua::EN::Inflect 1.895
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
-      version 0
   List-MoreUtils-0.33
     pathname: A/AD/ADAMK/List-MoreUtils-0.33.tar.gz
     provides:
@@ -2091,61 +1878,44 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       Params::Validate 0.15
       Sys::Syslog 0.25
-  Module-Build-0.4008
-    pathname: L/LE/LEONT/Module-Build-0.4008.tar.gz
+  Module-Build-Pluggable-0.10
+    pathname: T/TO/TOKUHIROM/Module-Build-Pluggable-0.10.tar.gz
     provides:
-      Module::Build 0.4008
-      Module::Build::Base 0.4008
-      Module::Build::Compat 0.4008
-      Module::Build::Config 0.4008
-      Module::Build::Cookbook 0.4008
-      Module::Build::Dumper 0.4008
-      Module::Build::ModuleInfo 0.4008
-      Module::Build::Notes 0.4008
-      Module::Build::PPMMaker 0.4008
-      Module::Build::Platform::Default 0.4008
-      Module::Build::Platform::MacOS 0.4008
-      Module::Build::Platform::Unix 0.4008
-      Module::Build::Platform::VMS 0.4008
-      Module::Build::Platform::VOS 0.4008
-      Module::Build::Platform::Windows 0.4008
-      Module::Build::Platform::aix 0.4008
-      Module::Build::Platform::cygwin 0.4008
-      Module::Build::Platform::darwin 0.4008
-      Module::Build::Platform::os2 0.4008
-      Module::Build::PodParser 0.4008
-      Module::Build::Version 0.87
-      Module::Build::YAML 1.41
-      inc::latest 0.4008
-      inc::latest::private 0.4008
+      Module::Build::Pluggable 0.10
+      Module::Build::Pluggable::Base undef
+      Module::Build::Pluggable::GithubMeta undef
+      Module::Build::Pluggable::Repository 0.10
+      Module::Build::Pluggable::Util undef
+      Test::Module::Build::Pluggable undef
     requirements:
-      CPAN::Meta 2.110420
-      CPAN::Meta::YAML 0.003
-      Cwd 0
-      Data::Dumper 0
-      ExtUtils::CBuilder 0.27
-      ExtUtils::Install 0
-      ExtUtils::Manifest 0
-      ExtUtils::Mkbootstrap 0
-      ExtUtils::ParseXS 2.21
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Class::Accessor::Lite 0
+      Class::Method::Modifiers 0
+      Data::OptList 0
       File::Basename 0
-      File::Compare 0
-      File::Copy 0
-      File::Find 0
       File::Path 0
-      File::Spec 0.82
-      File::Temp 0.15
-      Getopt::Long 0
-      Module::Metadata 1.000002
-      Parse::CPAN::Meta 1.4401
-      Perl::OSType 1
-      Pod::Man 2.17
-      Test::Harness 3.16
-      Test::More 0.49
-      Text::Abbrev 0
-      Text::ParseWords 0
-      perl 5.006001
-      version 0.87
+      File::Temp 0
+      Module::Build 0.38
+      Module::Load 0
+      Test::SharedFork 0
+      parent 0
+      perl 5.008001
+  Module-Build-Pluggable-CPANfile-0.05
+    pathname: K/KA/KAZEBURO/Module-Build-Pluggable-CPANfile-0.05.tar.gz
+    provides:
+      Module::Build::Pluggable::CPANfile 0.05
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      ExtUtils::CBuilder 0
+      List::Util 1.14
+      Module::Build 0.38
+      Module::Build::Pluggable 0.05
+      Module::CPANfile 0.9010
+      parent 0
+      perl 5.008005
+      version 0.99
   Module-Build-Tiny-0.030
     pathname: L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz
     provides:
@@ -2171,6 +1941,16 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Module-CPANfile-1.0002
+    pathname: M/MI/MIYAGAWA/Module-CPANfile-1.0002.tar.gz
+    provides:
+      Module::CPANfile 1.0002
+      Module::CPANfile::Environment undef
+      Module::CPANfile::Result undef
+    requirements:
+      CPAN::Meta 2.12091
+      CPAN::Meta::Prereqs 2.12091
+      ExtUtils::MakeMaker 6.30
   Module-Implementation-0.07
     pathname: D/DR/DROLSKY/Module-Implementation-0.07.tar.gz
     provides:
@@ -2186,19 +1966,6 @@ DISTRIBUTIONS
       Try::Tiny 0
       strict 0
       warnings 0
-  Module-Path-0.09
-    pathname: N/NE/NEILB/Module-Path-0.09.tar.gz
-    provides:
-      Module::Path 0.09
-    requirements:
-      Devel::FindPerl 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      File::Spec::Functions 0
-      FindBin 0.05
-      Test::More 0.88
-      strict 0
-      warnings 0
   Module-Runtime-0.013
     pathname: Z/ZE/ZEFRAM/Module-Runtime-0.013.tar.gz
     provides:
@@ -2208,24 +1975,6 @@ DISTRIBUTIONS
       Test::More 0
       perl 5.006
       strict 0
-      warnings 0
-  Module-Used-v1.3.0
-    pathname: E/EL/ELLIOTJS/Module-Used-v1.3.0.tar.gz
-    provides:
-      Module::Used 1.003000
-    requirements:
-      Const::Fast 0
-      English 0
-      Exporter 5.57
-      File::Next 1.02
-      Module::Build 0.2808
-      Module::Path 0.01
-      PPI::Document 1.205
-      Test::Deep 0.098
-      Test::More 0.72
-      strict 0
-      utf8 0
-      version 0.74
       warnings 0
   Mozilla-CA-20130114
     pathname: A/AB/ABH/Mozilla-CA-20130114.tar.gz
@@ -2337,215 +2086,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       common::sense 0
-  PPI-1.215
-    pathname: A/AD/ADAMK/PPI-1.215.tar.gz
-    provides:
-      PPI 1.215
-      PPI::Cache 1.215
-      PPI::Document 1.215
-      PPI::Document::File 1.215
-      PPI::Document::Fragment 1.215
-      PPI::Document::Normalized 1.215
-      PPI::Dumper 1.215
-      PPI::Element 1.215
-      PPI::Exception 1.215
-      PPI::Exception::ParserRejection 1.215
-      PPI::Exception::ParserTimeout 1.215
-      PPI::Find 1.215
-      PPI::Lexer 1.215
-      PPI::Node 1.215
-      PPI::Normal 1.215
-      PPI::Normal::Standard 1.215
-      PPI::Statement 1.215
-      PPI::Statement::Break 1.215
-      PPI::Statement::Compound 1.215
-      PPI::Statement::Data 1.215
-      PPI::Statement::End 1.215
-      PPI::Statement::Expression 1.215
-      PPI::Statement::Given 1.215
-      PPI::Statement::Include 1.215
-      PPI::Statement::Include::Perl6 1.215
-      PPI::Statement::Null 1.215
-      PPI::Statement::Package 1.215
-      PPI::Statement::Scheduled 1.215
-      PPI::Statement::Sub 1.215
-      PPI::Statement::Unknown 1.215
-      PPI::Statement::UnmatchedBrace 1.215
-      PPI::Statement::Variable 1.215
-      PPI::Statement::When 1.215
-      PPI::Structure 1.215
-      PPI::Structure::Block 1.215
-      PPI::Structure::Condition 1.215
-      PPI::Structure::Constructor 1.215
-      PPI::Structure::For 1.215
-      PPI::Structure::Given 1.215
-      PPI::Structure::List 1.215
-      PPI::Structure::Subscript 1.215
-      PPI::Structure::Unknown 1.215
-      PPI::Structure::When 1.215
-      PPI::Token 1.215
-      PPI::Token::ArrayIndex 1.215
-      PPI::Token::Attribute 1.215
-      PPI::Token::BOM 1.215
-      PPI::Token::Cast 1.215
-      PPI::Token::Comment 1.215
-      PPI::Token::DashedWord 1.215
-      PPI::Token::Data 1.215
-      PPI::Token::End 1.215
-      PPI::Token::HereDoc 1.215
-      PPI::Token::Label 1.215
-      PPI::Token::Magic 1.215
-      PPI::Token::Number 1.215
-      PPI::Token::Number::Binary 1.215
-      PPI::Token::Number::Exp 1.215
-      PPI::Token::Number::Float 1.215
-      PPI::Token::Number::Hex 1.215
-      PPI::Token::Number::Octal 1.215
-      PPI::Token::Number::Version 1.215
-      PPI::Token::Operator 1.215
-      PPI::Token::Pod 1.215
-      PPI::Token::Prototype 1.215
-      PPI::Token::Quote 1.215
-      PPI::Token::Quote::Double 1.215
-      PPI::Token::Quote::Interpolate 1.215
-      PPI::Token::Quote::Literal 1.215
-      PPI::Token::Quote::Single 1.215
-      PPI::Token::QuoteLike 1.215
-      PPI::Token::QuoteLike::Backtick 1.215
-      PPI::Token::QuoteLike::Command 1.215
-      PPI::Token::QuoteLike::Readline 1.215
-      PPI::Token::QuoteLike::Regexp 1.215
-      PPI::Token::QuoteLike::Words 1.215
-      PPI::Token::Regexp 1.215
-      PPI::Token::Regexp::Match 1.215
-      PPI::Token::Regexp::Substitute 1.215
-      PPI::Token::Regexp::Transliterate 1.215
-      PPI::Token::Separator 1.215
-      PPI::Token::Structure 1.215
-      PPI::Token::Symbol 1.215
-      PPI::Token::Unknown 1.215
-      PPI::Token::Whitespace 1.215
-      PPI::Token::Word 1.215
-      PPI::Token::_QuoteEngine 1.215
-      PPI::Token::_QuoteEngine::Full 1.215
-      PPI::Token::_QuoteEngine::Simple 1.215
-      PPI::Tokenizer 1.215
-      PPI::Transform 1.215
-      PPI::Transform::UpdateCopyright 1.215
-      PPI::Util 1.215
-      PPI::XSAccessor 1.215
-    requirements:
-      Class::Inspector 1.22
-      Clone 0.30
-      Digest::MD5 2.35
-      ExtUtils::MakeMaker 6.42
-      File::Remove 1.42
-      File::Spec 0.84
-      IO::String 1.07
-      List::MoreUtils 0.16
-      List::Util 1.20
-      Params::Util 1.00
-      Storable 2.17
-      Task::Weaken 0
-      Test::More 0.86
-      Test::NoWarnings 0.084
-      Test::Object 0.07
-      Test::SubCalls 1.07
-      perl 5.006
-  PPIx-Regexp-0.034
-    pathname: W/WY/WYANT/PPIx-Regexp-0.034.tar.gz
-    provides:
-      PPIx::Regexp 0.034
-      PPIx::Regexp::Constant 0.034
-      PPIx::Regexp::Dumper 0.034
-      PPIx::Regexp::Element 0.034
-      PPIx::Regexp::Lexer 0.034
-      PPIx::Regexp::Node 0.034
-      PPIx::Regexp::Node::Range 0.034
-      PPIx::Regexp::Structure 0.034
-      PPIx::Regexp::Structure::Assertion 0.034
-      PPIx::Regexp::Structure::BranchReset 0.034
-      PPIx::Regexp::Structure::Capture 0.034
-      PPIx::Regexp::Structure::CharClass 0.034
-      PPIx::Regexp::Structure::Code 0.034
-      PPIx::Regexp::Structure::Main 0.034
-      PPIx::Regexp::Structure::Modifier 0.034
-      PPIx::Regexp::Structure::NamedCapture 0.034
-      PPIx::Regexp::Structure::Quantifier 0.034
-      PPIx::Regexp::Structure::RegexSet 0.034
-      PPIx::Regexp::Structure::Regexp 0.034
-      PPIx::Regexp::Structure::Replacement 0.034
-      PPIx::Regexp::Structure::Subexpression 0.034
-      PPIx::Regexp::Structure::Switch 0.034
-      PPIx::Regexp::Structure::Unknown 0.034
-      PPIx::Regexp::Support 0.034
-      PPIx::Regexp::Token 0.034
-      PPIx::Regexp::Token::Assertion 0.034
-      PPIx::Regexp::Token::Backreference 0.034
-      PPIx::Regexp::Token::Backtrack 0.034
-      PPIx::Regexp::Token::CharClass 0.034
-      PPIx::Regexp::Token::CharClass::POSIX 0.034
-      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.034
-      PPIx::Regexp::Token::CharClass::Simple 0.034
-      PPIx::Regexp::Token::Code 0.034
-      PPIx::Regexp::Token::Comment 0.034
-      PPIx::Regexp::Token::Condition 0.034
-      PPIx::Regexp::Token::Control 0.034
-      PPIx::Regexp::Token::Delimiter 0.034
-      PPIx::Regexp::Token::Greediness 0.034
-      PPIx::Regexp::Token::GroupType 0.034
-      PPIx::Regexp::Token::GroupType::Assertion 0.034
-      PPIx::Regexp::Token::GroupType::BranchReset 0.034
-      PPIx::Regexp::Token::GroupType::Code 0.034
-      PPIx::Regexp::Token::GroupType::Modifier 0.034
-      PPIx::Regexp::Token::GroupType::NamedCapture 0.034
-      PPIx::Regexp::Token::GroupType::Subexpression 0.034
-      PPIx::Regexp::Token::GroupType::Switch 0.034
-      PPIx::Regexp::Token::Interpolation 0.034
-      PPIx::Regexp::Token::Literal 0.034
-      PPIx::Regexp::Token::Modifier 0.034
-      PPIx::Regexp::Token::Operator 0.034
-      PPIx::Regexp::Token::Quantifier 0.034
-      PPIx::Regexp::Token::Recursion 0.034
-      PPIx::Regexp::Token::Reference 0.034
-      PPIx::Regexp::Token::Structure 0.034
-      PPIx::Regexp::Token::Unknown 0.034
-      PPIx::Regexp::Token::Unmatched 0.034
-      PPIx::Regexp::Token::Whitespace 0.034
-      PPIx::Regexp::Tokenizer 0.034
-      PPIx::Regexp::Util 0.034
-    requirements:
-      List::MoreUtils 0
-      List::Util 0
-      PPI::Document 1.117
-      Scalar::Util 0
-      Task::Weaken 0
-      Test::More 0.88
-      perl 5.006
-  PPIx-Utilities-1.001000
-    pathname: E/EL/ELLIOTJS/PPIx-Utilities-1.001000.tar.gz
-    provides:
-      PPIx::Utilities 1.001000
-      PPIx::Utilities::Exception::Bug 1.001000
-      PPIx::Utilities::Node 1.001000
-      PPIx::Utilities::Statement 1.001000
-    requirements:
-      Data::Dumper 0
-      Exception::Class 0
-      Exporter 0
-      Module::Build 0.36
-      PPI 1.208
-      PPI::Document 1.208
-      PPI::Document::Fragment 1.208
-      PPI::Dumper 1.208
-      Readonly 0
-      Scalar::Util 0
-      Task::Weaken 0
-      Test::Deep 0
-      Test::More 0
-      base 0
-      strict 0
-      warnings 0
   Package-Stash-0.36
     pathname: D/DO/DOY/Package-Stash-0.36.tar.gz
     provides:
@@ -2637,18 +2177,31 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Path-Class-0.32
-    pathname: K/KW/KWILLIAMS/Path-Class-0.32.tar.gz
+  Parse-CPAN-Meta-1.4409
+    pathname: D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4409.tar.gz
     provides:
-      Path::Class 0.32
-      Path::Class::Dir 0.32
-      Path::Class::Entity 0.32
-      Path::Class::File 0.32
+      Parse::CPAN::Meta 1.4409
+    requirements:
+      CPAN::Meta::YAML 0.008
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      File::Spec 0.80
+      JSON::PP 2.27200
+      strict 0
+  Path-Class-0.33
+    pathname: K/KW/KWILLIAMS/Path-Class-0.33.tar.gz
+    provides:
+      Path::Class 0.33
+      Path::Class::Dir 0.33
+      Path::Class::Entity 0.33
+      Path::Class::File 0.33
     requirements:
       Carp 0
       Cwd 0
       Exporter 0
       ExtUtils::MakeMaker 6.30
+      File::Copy 0
       File::Path 0
       File::Spec 3.26
       File::Temp 0
@@ -2656,96 +2209,11 @@ DISTRIBUTIONS
       IO::Dir 0
       IO::File 0
       Module::Build 0.3601
+      Perl::OSType 0
       Scalar::Util 0
-      Test 0
-      Test::More 0
-      base 0
       overload 0
+      parent 0
       strict 0
-      warnings 0
-  Path-FindDev-0.4.2
-    pathname: K/KE/KENTNL/Path-FindDev-0.4.2.tar.gz
-    provides:
-      Path::FindDev 0.004002
-      Path::FindDev::Object 0.004002
-    requirements:
-      Carp 0
-      Class::Tiny 0.010
-      Module::Build 0.4008
-      Path::IsDev v0.2.2
-      Path::IsDev::Object 0
-      Path::Tiny 0.038
-      Scalar::Util 0
-      Sub::Exporter 0
-      perl 5.006
-      strict 0
-      warnings 0
-  Path-IsDev-1.000000
-    pathname: K/KE/KENTNL/Path-IsDev-1.000000.tar.gz
-    provides:
-      Path::IsDev 1.000000
-      Path::IsDev::Heuristic::Changelog 1.000000
-      Path::IsDev::Heuristic::DevDirMarker 1.000000
-      Path::IsDev::Heuristic::META 1.000000
-      Path::IsDev::Heuristic::MYMETA 1.000000
-      Path::IsDev::Heuristic::Makefile 1.000000
-      Path::IsDev::Heuristic::TestDir 1.000000
-      Path::IsDev::Heuristic::Tool::Dzil 1.000000
-      Path::IsDev::Heuristic::Tool::MakeMaker 1.000000
-      Path::IsDev::Heuristic::Tool::ModuleBuild 1.000000
-      Path::IsDev::Heuristic::VCS::Git 1.000000
-      Path::IsDev::HeuristicSet::Basic 1.000000
-      Path::IsDev::NegativeHeuristic::HomeDir 1.000000
-      Path::IsDev::NegativeHeuristic::IsDev::IgnoreFile 1.000000
-      Path::IsDev::NegativeHeuristic::PerlINC 1.000000
-      Path::IsDev::Object 1.000000
-      Path::IsDev::Result 1.000000
-      Path::IsDev::Role::Heuristic 1.000000
-      Path::IsDev::Role::HeuristicSet 1.000000
-      Path::IsDev::Role::HeuristicSet::Simple 1.000000
-      Path::IsDev::Role::Matcher::Child::BaseName::MatchRegexp 1.000000
-      Path::IsDev::Role::Matcher::Child::BaseName::MatchRegexp::File 1.000000
-      Path::IsDev::Role::Matcher::Child::Exists::Any 1.000000
-      Path::IsDev::Role::Matcher::Child::Exists::Any::Dir 1.000000
-      Path::IsDev::Role::Matcher::Child::Exists::Any::File 1.000000
-      Path::IsDev::Role::Matcher::FullPath::Is::Any 1.000000
-      Path::IsDev::Role::NegativeHeuristic 1.000000
-    requirements:
-      Carp 0
-      Class::Tiny 0.010
-      File::HomeDir 0
-      Module::Build 0.4007
-      Module::Runtime 0
-      Path::Tiny 0
-      Role::Tiny 0
-      Role::Tiny::With 0
-      Scalar::Util 0
-      Sub::Exporter 0
-      perl 5.006
-      strict 0
-      warnings 0
-  Path-Tiny-0.044
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.044.tar.gz
-    provides:
-      Path::Tiny 0.044
-    requirements:
-      Carp 0
-      Cwd 0
-      Digest 1.03
-      Digest::SHA 5.45
-      Exporter 5.57
-      ExtUtils::MakeMaker 6.17
-      Fcntl 0
-      File::Copy 0
-      File::Path 2.07
-      File::Spec 3.40
-      File::Temp 0.18
-      File::stat 0
-      constant 0
-      if 0
-      overload 0
-      strict 0
-      warnings 0
   PathTools-3.40
     pathname: S/SM/SMUELLER/PathTools-3.40.tar.gz
     provides:
@@ -2765,287 +2233,6 @@ DISTRIBUTIONS
       File::Basename 0
       Scalar::Util 0
       Test 0
-  Perl-Critic-1.121
-    pathname: T/TH/THALJEF/Perl-Critic-1.121.tar.gz
-    provides:
-      Perl::Critic 1.121
-      Perl::Critic::Annotation 1.121
-      Perl::Critic::Command 1.121
-      Perl::Critic::Config 1.121
-      Perl::Critic::Document 1.121
-      Perl::Critic::Exception 1.121
-      Perl::Critic::Exception::AggregateConfiguration 1.121
-      Perl::Critic::Exception::Configuration 1.121
-      Perl::Critic::Exception::Configuration::Generic 1.121
-      Perl::Critic::Exception::Configuration::NonExistentPolicy 1.121
-      Perl::Critic::Exception::Configuration::Option 1.121
-      Perl::Critic::Exception::Configuration::Option::Global 1.121
-      Perl::Critic::Exception::Configuration::Option::Global::ExtraParameter 1.121
-      Perl::Critic::Exception::Configuration::Option::Global::ParameterValue 1.121
-      Perl::Critic::Exception::Configuration::Option::Policy 1.121
-      Perl::Critic::Exception::Configuration::Option::Policy::ExtraParameter 1.121
-      Perl::Critic::Exception::Configuration::Option::Policy::ParameterValue 1.121
-      Perl::Critic::Exception::Fatal 1.121
-      Perl::Critic::Exception::Fatal::Generic 1.121
-      Perl::Critic::Exception::Fatal::Internal 1.121
-      Perl::Critic::Exception::Fatal::PolicyDefinition 1.121
-      Perl::Critic::Exception::IO 1.121
-      Perl::Critic::Exception::Parse 1.121
-      Perl::Critic::OptionsProcessor 1.121
-      Perl::Critic::Policy 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitBooleanGrep 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitComplexMappings 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitLvalueSubstr 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitReverseSortBlock 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitStringyEval 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitStringySplit 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitUniversalCan 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitUniversalIsa 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitVoidGrep 1.121
-      Perl::Critic::Policy::BuiltinFunctions::ProhibitVoidMap 1.121
-      Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep 1.121
-      Perl::Critic::Policy::BuiltinFunctions::RequireBlockMap 1.121
-      Perl::Critic::Policy::BuiltinFunctions::RequireGlobFunction 1.121
-      Perl::Critic::Policy::BuiltinFunctions::RequireSimpleSortBlock 1.121
-      Perl::Critic::Policy::ClassHierarchies::ProhibitAutoloading 1.121
-      Perl::Critic::Policy::ClassHierarchies::ProhibitExplicitISA 1.121
-      Perl::Critic::Policy::ClassHierarchies::ProhibitOneArgBless 1.121
-      Perl::Critic::Policy::CodeLayout::ProhibitHardTabs 1.121
-      Perl::Critic::Policy::CodeLayout::ProhibitParensWithBuiltins 1.121
-      Perl::Critic::Policy::CodeLayout::ProhibitQuotedWordLists 1.121
-      Perl::Critic::Policy::CodeLayout::ProhibitTrailingWhitespace 1.121
-      Perl::Critic::Policy::CodeLayout::RequireConsistentNewlines 1.121
-      Perl::Critic::Policy::CodeLayout::RequireTidyCode 1.121
-      Perl::Critic::Policy::CodeLayout::RequireTrailingCommas 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitCStyleForLoops 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitDeepNests 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitLabelsWithSpecialBlockNames 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitMutatingListFunctions 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitNegativeExpressionsInUnlessAndUntilConditions 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitUnlessBlocks 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitUnreachableCode 1.121
-      Perl::Critic::Policy::ControlStructures::ProhibitUntilBlocks 1.121
-      Perl::Critic::Policy::Documentation::PodSpelling 1.121
-      Perl::Critic::Policy::Documentation::RequirePackageMatchesPodName 1.121
-      Perl::Critic::Policy::Documentation::RequirePodAtEnd 1.121
-      Perl::Critic::Policy::Documentation::RequirePodLinksIncludeText 1.121
-      Perl::Critic::Policy::Documentation::RequirePodSections 1.121
-      Perl::Critic::Policy::ErrorHandling::RequireCarping 1.121
-      Perl::Critic::Policy::ErrorHandling::RequireCheckingReturnValueOfEval 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitBacktickOperators 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitExplicitStdin 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitInteractiveTest 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitJoinedReadline 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitOneArgSelect 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitReadlineInForLoop 1.121
-      Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen 1.121
-      Perl::Critic::Policy::InputOutput::RequireBracedFileHandleWithPrint 1.121
-      Perl::Critic::Policy::InputOutput::RequireBriefOpen 1.121
-      Perl::Critic::Policy::InputOutput::RequireCheckedClose 1.121
-      Perl::Critic::Policy::InputOutput::RequireCheckedOpen 1.121
-      Perl::Critic::Policy::InputOutput::RequireCheckedSyscalls 1.121
-      Perl::Critic::Policy::InputOutput::RequireEncodingWithUTF8Layer 1.121
-      Perl::Critic::Policy::Miscellanea::ProhibitFormats 1.121
-      Perl::Critic::Policy::Miscellanea::ProhibitTies 1.121
-      Perl::Critic::Policy::Miscellanea::ProhibitUnrestrictedNoCritic 1.121
-      Perl::Critic::Policy::Miscellanea::ProhibitUselessNoCritic 1.121
-      Perl::Critic::Policy::Modules::ProhibitAutomaticExportation 1.121
-      Perl::Critic::Policy::Modules::ProhibitConditionalUseStatements 1.121
-      Perl::Critic::Policy::Modules::ProhibitEvilModules 1.121
-      Perl::Critic::Policy::Modules::ProhibitExcessMainComplexity 1.121
-      Perl::Critic::Policy::Modules::ProhibitMultiplePackages 1.121
-      Perl::Critic::Policy::Modules::RequireBarewordIncludes 1.121
-      Perl::Critic::Policy::Modules::RequireEndWithOne 1.121
-      Perl::Critic::Policy::Modules::RequireExplicitPackage 1.121
-      Perl::Critic::Policy::Modules::RequireFilenameMatchesPackage 1.121
-      Perl::Critic::Policy::Modules::RequireNoMatchVarsWithUseEnglish 1.121
-      Perl::Critic::Policy::Modules::RequireVersionVar 1.121
-      Perl::Critic::Policy::NamingConventions::Capitalization 1.121
-      Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames 1.121
-      Perl::Critic::Policy::Objects::ProhibitIndirectSyntax 1.121
-      Perl::Critic::Policy::References::ProhibitDoubleSigils 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitCaptureWithoutTest 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitComplexRegexes 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitEnumeratedClasses 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitEscapedMetacharacters 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitFixedStringMatches 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitSingleCharAlternation 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitUnusedCapture 1.121
-      Perl::Critic::Policy::RegularExpressions::ProhibitUnusualDelimiters 1.121
-      Perl::Critic::Policy::RegularExpressions::RequireBracesForMultiline 1.121
-      Perl::Critic::Policy::RegularExpressions::RequireDotMatchAnything 1.121
-      Perl::Critic::Policy::RegularExpressions::RequireExtendedFormatting 1.121
-      Perl::Critic::Policy::RegularExpressions::RequireLineBoundaryMatching 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitAmpersandSigils 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitBuiltinHomonyms 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitExcessComplexity 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitExplicitReturnUndef 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitManyArgs 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitNestedSubs 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitReturnSort 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitSubroutinePrototypes 1.121
-      Perl::Critic::Policy::Subroutines::ProhibitUnusedPrivateSubroutines 1.121
-      Perl::Critic::Policy::Subroutines::ProtectPrivateSubs 1.121
-      Perl::Critic::Policy::Subroutines::RequireArgUnpacking 1.121
-      Perl::Critic::Policy::Subroutines::RequireFinalReturn 1.121
-      Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict 1.121
-      Perl::Critic::Policy::TestingAndDebugging::ProhibitNoWarnings 1.121
-      Perl::Critic::Policy::TestingAndDebugging::ProhibitProlongedStrictureOverride 1.121
-      Perl::Critic::Policy::TestingAndDebugging::RequireTestLabels 1.121
-      Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict 1.121
-      Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitCommaSeparatedStatements 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitComplexVersion 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitConstantPragma 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyQuotes 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitEscapedCharacters 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitImplicitNewlines 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitLeadingZeros 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitLongChainsOfMethodCalls 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitMagicNumbers 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitMismatchedOperators 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitMixedBooleanOperators 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitNoisyQuotes 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::ProhibitVersionStrings 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::RequireConstantVersion 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::RequireInterpolationOfMetachars 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::RequireNumberSeparators 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::RequireQuotedHeredocTerminator 1.121
-      Perl::Critic::Policy::ValuesAndExpressions::RequireUpperCaseHeredocTerminator 1.121
-      Perl::Critic::Policy::Variables::ProhibitAugmentedAssignmentInDeclaration 1.121
-      Perl::Critic::Policy::Variables::ProhibitConditionalDeclarations 1.121
-      Perl::Critic::Policy::Variables::ProhibitEvilVariables 1.121
-      Perl::Critic::Policy::Variables::ProhibitLocalVars 1.121
-      Perl::Critic::Policy::Variables::ProhibitMatchVars 1.121
-      Perl::Critic::Policy::Variables::ProhibitPackageVars 1.121
-      Perl::Critic::Policy::Variables::ProhibitPerl4PackageNames 1.121
-      Perl::Critic::Policy::Variables::ProhibitPunctuationVars 1.121
-      Perl::Critic::Policy::Variables::ProhibitReusedNames 1.121
-      Perl::Critic::Policy::Variables::ProhibitUnusedVariables 1.121
-      Perl::Critic::Policy::Variables::ProtectPrivateVars 1.121
-      Perl::Critic::Policy::Variables::RequireInitializationForLocalVars 1.121
-      Perl::Critic::Policy::Variables::RequireLexicalLoopIterators 1.121
-      Perl::Critic::Policy::Variables::RequireLocalizedPunctuationVars 1.121
-      Perl::Critic::Policy::Variables::RequireNegativeIndices 1.121
-      Perl::Critic::PolicyConfig 1.121
-      Perl::Critic::PolicyFactory 1.121
-      Perl::Critic::PolicyListing 1.121
-      Perl::Critic::PolicyParameter 1.121
-      Perl::Critic::PolicyParameter::Behavior 1.121
-      Perl::Critic::PolicyParameter::Behavior::Boolean 1.121
-      Perl::Critic::PolicyParameter::Behavior::Enumeration 1.121
-      Perl::Critic::PolicyParameter::Behavior::Integer 1.121
-      Perl::Critic::PolicyParameter::Behavior::String 1.121
-      Perl::Critic::PolicyParameter::Behavior::StringList 1.121
-      Perl::Critic::ProfilePrototype 1.121
-      Perl::Critic::Statistics 1.121
-      Perl::Critic::TestUtils 1.121
-      Perl::Critic::Theme 1.121
-      Perl::Critic::ThemeListing 1.121
-      Perl::Critic::UserProfile 1.121
-      Perl::Critic::Utils 1.121
-      Perl::Critic::Utils::Constants 1.121
-      Perl::Critic::Utils::DataConversion 1.121
-      Perl::Critic::Utils::McCabe 1.121
-      Perl::Critic::Utils::POD 1.121
-      Perl::Critic::Utils::POD::ParseInteriorSequence 1.121
-      Perl::Critic::Utils::PPI 1.121
-      Perl::Critic::Utils::Perl 1.121
-      Perl::Critic::Violation 1.121
-      Test::Perl::Critic::Policy 1.121
-    requirements:
-      B::Keywords 1.05
-      Carp 0
-      Config::Tiny 2
-      Email::Address 1.889
-      English 0
-      Exception::Class 1.23
-      Exporter 5.63
-      File::Basename 0
-      File::Find 0
-      File::Path 0
-      File::Spec 0
-      File::Spec::Unix 0
-      File::Temp 0
-      Getopt::Long 0
-      IO::String 0
-      IPC::Open2 1
-      List::MoreUtils 0.19
-      List::Util 0
-      Module::Build 0.34
-      Module::Pluggable 3.1
-      PPI 1.215
-      PPI::Document 1.215
-      PPI::Document::File 1.215
-      PPI::Node 1.215
-      PPI::Token::Quote::Single 1.215
-      PPI::Token::Whitespace 1.215
-      PPIx::Regexp 0.027
-      PPIx::Utilities::Node 1.001
-      PPIx::Utilities::Statement 1.001
-      Perl::Tidy 0
-      Pod::Parser 0
-      Pod::PlainText 0
-      Pod::Select 0
-      Pod::Spell 1
-      Pod::Usage 0
-      Readonly 1.03
-      Scalar::Util 0
-      String::Format 1.13
-      Task::Weaken 0
-      Test::Builder 0.92
-      Test::Deep 0
-      Test::More 0
-      Text::ParseWords 3
-      base 0
-      charnames 0
-      lib 0
-      overload 0
-      strict 0
-      version 0.77
-      warnings 0
-  Perl-Tidy-20130922
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20130922.tar.gz
-    provides:
-      Perl::Tidy 20130922
-      Perl::Tidy::DevNull 20130922
-      Perl::Tidy::Diagnostics 20130922
-      Perl::Tidy::HtmlWriter 20130922
-      Perl::Tidy::IOScalar 20130922
-      Perl::Tidy::IOScalarArray 20130922
-      Perl::Tidy::LineSink 20130922
-      Perl::Tidy::LineSource 20130922
-      Perl::Tidy::Logger 20130922
-    requirements:
-      ExtUtils::MakeMaker 0
-  Pod-Spell-1.13
-    pathname: X/XE/XENO/Pod-Spell-1.13.tar.gz
-    provides:
-      Pod::Spell 1.13
-      Pod::Wordlist 1.13
-    requirements:
-      Carp 0
-      Class::Tiny 0
-      ExtUtils::MakeMaker 6.30
-      File::ShareDir::Install 0.03
-      File::ShareDir::ProjectDistDir 0
-      File::Slurp 0
-      Lingua::EN::Inflect 0
-      Pod::Escapes 0
-      Pod::Parser 0
-      Text::Wrap 0
-      base 0
-      constant 0
-      locale 0
-      strict 0
-      warnings 0
   Probe-Perl-0.03
     pathname: K/KW/KWILLIAMS/Probe-Perl-0.03.tar.gz
     provides:
@@ -3055,24 +2242,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       File::Spec 0
       strict 0
-  Readonly-1.03
-    pathname: R/RO/ROODE/Readonly-1.03.tar.gz
-    provides:
-      Readonly 1.03
-      Readonly::Array 1.03
-      Readonly::Hash 1.03
-      Readonly::Scalar 1.03
-    requirements:
-      ExtUtils::MakeMaker 0
-  Role-Tiny-1.003002
-    pathname: H/HA/HAARG/Role-Tiny-1.003002.tar.gz
-    provides:
-      Role::Tiny 1.003002
-      Role::Tiny::With undef
-    requirements:
-      Exporter 5.57
-      Test::Fatal 0.003
-      Test::More 0.96
   SQL-Maker-1.12
     pathname: T/TO/TOKUHIROM/SQL-Maker-1.12.tar.gz
     provides:
@@ -3095,33 +2264,32 @@ DISTRIBUTIONS
       Scalar::Util 0
       parent 0
       perl 5.008001
-  String-Format-1.17
-    pathname: D/DA/DARREN/String-Format-1.17.tar.gz
+  Scalar-List-Utils-1.35
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.35.tar.gz
     provides:
-      String::Format 1.17
+      List::Util 1.35
+      List::Util::XS 1.35
+      Scalar::Util 1.35
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Sub-Exporter-0.987
-    pathname: R/RJ/RJBS/Sub-Exporter-0.987.tar.gz
+  Smart-Options-0.053
+    pathname: M/MI/MIKIHOSHI/Smart-Options-0.053.tar.gz
     provides:
-      Sub::Exporter 0.987
-      Sub::Exporter::Util 0.987
-      Test::SubExporter::DashSetup undef
-      Test::SubExporter::Faux undef
-      Test::SubExporter::GroupGen undef
-      Test::SubExporter::GroupGenSubclass undef
-      Test::SubExporter::ObjGen undef
-      Test::SubExporter::ObjGen::Obj undef
-      Test::SubExporter::s_e undef
+      Smart::Options 0.053
+      Smart::Options::Declare undef
     requirements:
-      Carp 0
-      Data::OptList 0.100
-      ExtUtils::MakeMaker 6.30
-      Params::Util 0.14
-      Sub::Install 0.92
-      strict 0
-      warnings 0
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Exporter 0
+      File::Slurp 0
+      List::MoreUtils 0
+      Module::Build 0.38
+      Module::Build::Pluggable 0
+      Module::Build::Pluggable::CPANfile 0
+      PadWalker 0
+      Text::Table 0
+      perl 5.010001
   Sub-Exporter-Progressive-0.001011
     pathname: F/FR/FREW/Sub-Exporter-Progressive-0.001011.tar.gz
     provides:
@@ -3154,16 +2322,23 @@ DISTRIBUTIONS
       constant 0
       strict 0
       warnings 0
-  Task-Weaken-1.04
-    pathname: A/AD/ADAMK/Task-Weaken-1.04.tar.gz
+  Sys-Syslog-0.33
+    pathname: S/SA/SAPER/Sys-Syslog-0.33.tar.gz
     provides:
-      Task::Weaken 1.04
+      Sys::Syslog 0.33
+      Sys::Syslog::Win32 undef
     requirements:
-      ExtUtils::MakeMaker 6.42
-      File::Spec 0.80
-      Scalar::Util 1.14
-      Test::More 0.42
-      perl 5.005
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      File::Basename 0
+      File::Spec 0
+      POSIX 0
+      Socket 0
+      Test::More 0
+      Win32::EventLog 0
+      Win32::TieRegistry 0
+      XSLoader 0
   Teng-0.20
     pathname: S/SA/SATOH/Teng-0.20.tar.gz
     provides:
@@ -3204,64 +2379,13 @@ DISTRIBUTIONS
       Test::Requires 0
       Test::SharedFork 0.15
       parent 0
-  Test-Deep-0.110
-    pathname: R/RJ/RJBS/Test-Deep-0.110.tar.gz
+  TermReadKey-2.31
+    pathname: J/JS/JSTOWE/TermReadKey-2.31.tar.gz
     provides:
-      Test::Deep 0.110
-      Test::Deep::All undef
-      Test::Deep::Any undef
-      Test::Deep::Array undef
-      Test::Deep::ArrayEach undef
-      Test::Deep::ArrayElementsOnly undef
-      Test::Deep::ArrayLength undef
-      Test::Deep::ArrayLengthOnly undef
-      Test::Deep::Blessed undef
-      Test::Deep::Boolean undef
-      Test::Deep::Cache undef
-      Test::Deep::Cache::Simple undef
-      Test::Deep::Class undef
-      Test::Deep::Cmp undef
-      Test::Deep::Code undef
-      Test::Deep::Hash undef
-      Test::Deep::HashEach undef
-      Test::Deep::HashElements undef
-      Test::Deep::HashKeys undef
-      Test::Deep::HashKeysOnly undef
-      Test::Deep::Ignore undef
-      Test::Deep::Isa undef
-      Test::Deep::ListMethods undef
-      Test::Deep::MM undef
-      Test::Deep::Methods undef
-      Test::Deep::NoTest undef
-      Test::Deep::Number undef
-      Test::Deep::Ref undef
-      Test::Deep::RefType undef
-      Test::Deep::Regexp undef
-      Test::Deep::RegexpMatches undef
-      Test::Deep::RegexpRef undef
-      Test::Deep::RegexpRefOnly undef
-      Test::Deep::RegexpVersion undef
-      Test::Deep::ScalarRef undef
-      Test::Deep::ScalarRefOnly undef
-      Test::Deep::Set undef
-      Test::Deep::Shallow undef
-      Test::Deep::Stack undef
-      Test::Deep::String undef
-      Test::Deep::SubHash undef
-      Test::Deep::SubHashElements undef
-      Test::Deep::SubHashKeys undef
-      Test::Deep::SubHashKeysOnly undef
-      Test::Deep::SuperHash undef
-      Test::Deep::SuperHashElements undef
-      Test::Deep::SuperHashKeys undef
-      Test::Deep::SuperHashKeysOnly undef
+      Configure undef
+      Term::ReadKey 2.31
     requirements:
       ExtUtils::MakeMaker 0
-      List::Util 1.09
-      Scalar::Util 1.09
-      Test::More 0
-      Test::NoWarnings 0.02
-      Test::Tester 0.04
   Test-Exception-0.32
     pathname: A/AD/ADIE/Test-Exception-0.32.tar.gz
     provides:
@@ -3286,60 +2410,59 @@ DISTRIBUTIONS
       Try::Tiny 0.07
       strict 0
       warnings 0
-  Test-Harness-3.29
-    pathname: O/OV/OVID/Test-Harness-3.29.tar.gz
+  Test-Harness-3.30
+    pathname: L/LE/LEONT/Test-Harness-3.30.tar.gz
     provides:
-      App::Prove 3.29
-      App::Prove::State 3.29
-      App::Prove::State::Result 3.29
-      App::Prove::State::Result::Test 3.29
-      TAP::Base 3.29
-      TAP::Formatter::Base 3.29
-      TAP::Formatter::Color 3.29
-      TAP::Formatter::Console 3.29
-      TAP::Formatter::Console::ParallelSession 3.29
-      TAP::Formatter::Console::Session 3.29
-      TAP::Formatter::File 3.29
-      TAP::Formatter::File::Session 3.29
-      TAP::Formatter::Session 3.29
-      TAP::Harness 3.29
-      TAP::Harness::Env 3.29
-      TAP::Object 3.29
-      TAP::Parser 3.29
-      TAP::Parser::Aggregator 3.29
-      TAP::Parser::Grammar 3.29
-      TAP::Parser::Iterator 3.29
-      TAP::Parser::Iterator::Array 3.29
-      TAP::Parser::Iterator::Process 3.29
-      TAP::Parser::Iterator::Stream 3.29
-      TAP::Parser::IteratorFactory 3.29
-      TAP::Parser::Multiplexer 3.29
-      TAP::Parser::Result 3.29
-      TAP::Parser::Result::Bailout 3.29
-      TAP::Parser::Result::Comment 3.29
-      TAP::Parser::Result::Plan 3.29
-      TAP::Parser::Result::Pragma 3.29
-      TAP::Parser::Result::Test 3.29
-      TAP::Parser::Result::Unknown 3.29
-      TAP::Parser::Result::Version 3.29
-      TAP::Parser::Result::YAML 3.29
-      TAP::Parser::ResultFactory 3.29
-      TAP::Parser::Scheduler 3.29
-      TAP::Parser::Scheduler::Job 3.29
-      TAP::Parser::Scheduler::Spinner 3.29
-      TAP::Parser::Source 3.29
-      TAP::Parser::SourceHandler 3.29
-      TAP::Parser::SourceHandler::Executable 3.29
-      TAP::Parser::SourceHandler::File 3.29
-      TAP::Parser::SourceHandler::Handle 3.29
-      TAP::Parser::SourceHandler::Perl 3.29
-      TAP::Parser::SourceHandler::RawTAP 3.29
-      TAP::Parser::YAMLish::Reader 3.29
-      TAP::Parser::YAMLish::Writer 3.29
-      Test::Harness 3.29
+      App::Prove 3.30
+      App::Prove::State 3.30
+      App::Prove::State::Result 3.30
+      App::Prove::State::Result::Test 3.30
+      TAP::Base 3.30
+      TAP::Formatter::Base 3.30
+      TAP::Formatter::Color 3.30
+      TAP::Formatter::Console 3.30
+      TAP::Formatter::Console::ParallelSession 3.30
+      TAP::Formatter::Console::Session 3.30
+      TAP::Formatter::File 3.30
+      TAP::Formatter::File::Session 3.30
+      TAP::Formatter::Session 3.30
+      TAP::Harness 3.30
+      TAP::Harness::Env 3.30
+      TAP::Object 3.30
+      TAP::Parser 3.30
+      TAP::Parser::Aggregator 3.30
+      TAP::Parser::Grammar 3.30
+      TAP::Parser::Iterator 3.30
+      TAP::Parser::Iterator::Array 3.30
+      TAP::Parser::Iterator::Process 3.30
+      TAP::Parser::Iterator::Stream 3.30
+      TAP::Parser::IteratorFactory 3.30
+      TAP::Parser::Multiplexer 3.30
+      TAP::Parser::Result 3.30
+      TAP::Parser::Result::Bailout 3.30
+      TAP::Parser::Result::Comment 3.30
+      TAP::Parser::Result::Plan 3.30
+      TAP::Parser::Result::Pragma 3.30
+      TAP::Parser::Result::Test 3.30
+      TAP::Parser::Result::Unknown 3.30
+      TAP::Parser::Result::Version 3.30
+      TAP::Parser::Result::YAML 3.30
+      TAP::Parser::ResultFactory 3.30
+      TAP::Parser::Scheduler 3.30
+      TAP::Parser::Scheduler::Job 3.30
+      TAP::Parser::Scheduler::Spinner 3.30
+      TAP::Parser::Source 3.30
+      TAP::Parser::SourceHandler 3.30
+      TAP::Parser::SourceHandler::Executable 3.30
+      TAP::Parser::SourceHandler::File 3.30
+      TAP::Parser::SourceHandler::Handle 3.30
+      TAP::Parser::SourceHandler::Perl 3.30
+      TAP::Parser::SourceHandler::RawTAP 3.30
+      TAP::Parser::YAMLish::Reader 3.30
+      TAP::Parser::YAMLish::Writer 3.30
+      Test::Harness 3.30
     requirements:
       ExtUtils::MakeMaker 0
-      parent 0
   Test-Mock-Guard-0.09
     pathname: X/XA/XAICRON/Test-Mock-Guard-0.09.tar.gz
     provides:
@@ -3350,62 +2473,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.96
       perl 5.006001
-  Test-Module-Used-0.2.4
-    pathname: T/TS/TSUCCHI/Test-Module-Used-0.2.4.tar.gz
-    provides:
-      Test::Module::Used 0.002004
-    requirements:
-      CPAN::Meta 0
-      ExtUtils::MakeMaker 6.59
-      List::MoreUtils 0
-      Module::CoreList 0
-      Module::Used 0
-      PPI::Document 0
-      Test::Builder::Tester 0
-      Test::More 0
-      perl 5.008
-      version 0.77
-  Test-NoWarnings-1.04
-    pathname: A/AD/ADAMK/Test-NoWarnings-1.04.tar.gz
-    provides:
-      Test::NoWarnings 1.04
-      Test::NoWarnings::Warning 1.04
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::Builder 0.86
-      Test::More 0.47
-      Test::Tester 0.107
-      perl 5.006
-  Test-Object-0.07
-    pathname: A/AD/ADAMK/Test-Object-0.07.tar.gz
-    provides:
-      Test::Object 0.07
-      Test::Object::Test 0.07
-    requirements:
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      File::Spec 0.80
-      Scalar::Util 1.16
-      Test::Builder 0.33
-      Test::Builder::Tester 1.02
-      Test::More 0.42
-      overload 0
-  Test-Perl-Critic-1.02
-    pathname: T/TH/THALJEF/Test-Perl-Critic-1.02.tar.gz
-    provides:
-      Test::Perl::Critic 1.02
-    requirements:
-      Carp 0
-      English 0
-      Module::Build 0.35
-      Perl::Critic 1.105
-      Perl::Critic::Utils 1.105
-      Perl::Critic::Violation 1.105
-      Test::Builder 0
-      Test::More 0
-      strict 0
-      warnings 0
   Test-Requires-0.07
     pathname: T/TO/TOKUHIROM/Test-Requires-0.07.tar.gz
     provides:
@@ -3445,42 +2512,6 @@ DISTRIBUTIONS
       Test::Requires 0
       Time::HiRes 0
       perl 5.008
-  Test-SubCalls-1.09
-    pathname: A/AD/ADAMK/Test-SubCalls-1.09.tar.gz
-    provides:
-      Test::SubCalls 1.09
-    requirements:
-      ExtUtils::MakeMaker 6.42
-      File::Spec 0.80
-      Hook::LexWrap 0.20
-      Test::Builder::Tester 1.02
-      Test::More 0.42
-  Test-TCP-2.02
-    pathname: T/TO/TOKUHIROM/Test-TCP-2.02.tar.gz
-    provides:
-      Net::EmptyPort undef
-      Test::TCP 2.02
-      Test::TCP::CheckPort undef
-    requirements:
-      CPAN::Meta 0
-      CPAN::Meta::Prereqs 0
-      ExtUtils::CBuilder 0
-      IO::Socket::INET 0
-      Module::Build 0.38
-      Test::More 0
-      Test::SharedFork 0.19
-      Time::HiRes 0
-      perl 5.008001
-  Test-Tester-0.109
-    pathname: F/FD/FDALY/Test-Tester-0.109.tar.gz
-    provides:
-      Test::Tester 0.109
-      Test::Tester::Capture undef
-      Test::Tester::CaptureRunner undef
-      Test::Tester::Delegate undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::Builder 0
   Test-Warn-0.24
     pathname: C/CH/CHORNY/Test-Warn-0.24.tar.gz
     provides:
@@ -3518,24 +2549,6 @@ DISTRIBUTIONS
       Text::Aligner 0.05
       strict 0
       warnings 0
-  Text-TestBase-0.12
-    pathname: T/TO/TOKUHIROM/Text-TestBase-0.12.tar.gz
-    provides:
-      Data::Section::TestBase 0.12
-      Test::Base::Less 0.12
-      Text::TestBase 0.12
-      Text::TestBase::Block undef
-    requirements:
-      CPAN::Meta 0
-      CPAN::Meta::Prereqs 0
-      Class::Accessor::Lite 0.05
-      Exporter 0
-      ExtUtils::CBuilder 0
-      Module::Build 0.38
-      Test::Builder::Module 0
-      Test::More 0.98
-      parent 0
-      perl 5.008001
   TimeDate-2.30
     pathname: G/GB/GBARR/TimeDate-2.30.tar.gz
     provides:
@@ -3673,6 +2686,19 @@ DISTRIBUTIONS
       Test 0
       Test::More 0
       perl 5.008001
+  Variable-Magic-0.53
+    pathname: V/VP/VPIT/Variable-Magic-0.53.tar.gz
+    provides:
+      Variable::Magic 0.53
+    requirements:
+      Carp 0
+      Config 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Test::More 0
+      XSLoader 0
+      base 0
+      perl 5.008
   WWW-RobotRules-6.02
     pathname: G/GA/GAAS/WWW-RobotRules-6.02.tar.gz
     provides:
@@ -3685,33 +2711,57 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
-  YAML-0.84
-    pathname: M/MS/MSTROUT/YAML-0.84.tar.gz
+  Win32-EventLog-0.077
+    pathname: J/JD/JDB/Win32-EventLog-0.077.tar.gz
     provides:
-      Test::YAML 0.84
-      Test::YAML::Filter 0.84
-      YAML 0.84
-      YAML::Any 0.84
-      YAML::Dumper 0.84
-      YAML::Dumper::Base 0.84
-      YAML::Error 0.84
-      YAML::Loader 0.84
-      YAML::Loader::Base 0.84
-      YAML::Marshall 0.84
-      YAML::Mo 0.84
-      YAML::Node 0.84
-      YAML::Tag 0.84
-      YAML::Type::blessed 0.84
-      YAML::Type::code 0.84
-      YAML::Type::glob 0.84
-      YAML::Type::ref 0.84
-      YAML::Type::regexp 0.84
-      YAML::Type::undef 0.84
-      YAML::Types 0.84
-      YAML::Warning 0.84
-      yaml_mapping 0.84
-      yaml_scalar 0.84
-      yaml_sequence 0.84
+      Win32::EventLog 0.077
+    requirements:
+      ExtUtils::MakeMaker 0
+  Win32-TieRegistry-0.26
+    pathname: A/AD/ADAMK/Win32-TieRegistry-0.26.tar.gz
+    provides:
+      Tie::Registry 0.15
+      Win32::TieRegistry 0.26
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Test::More 0.42
+      Tie::Hash 0
+      Win32API::Registry 0.24
+  Win32API-Registry-0.32
+    pathname: B/BL/BLM/Win32API-Registry-0.32.tar.gz
+    provides:
+      ExtUtils::Myconst2perl 1
+      Win32API::Registry 0.32
+    requirements:
+      ExtUtils::MakeMaker 0
+  YAML-0.88
+    pathname: I/IN/INGY/YAML-0.88.tar.gz
+    provides:
+      Test::YAML 0.88
+      Test::YAML::Filter 0.88
+      YAML 0.88
+      YAML::Any 0.88
+      YAML::Dumper 0.88
+      YAML::Dumper::Base 0.88
+      YAML::Error 0.88
+      YAML::Loader 0.88
+      YAML::Loader::Base 0.88
+      YAML::Marshall 0.88
+      YAML::Mo 0.88
+      YAML::Node 0.88
+      YAML::Tag 0.88
+      YAML::Type::blessed 0.88
+      YAML::Type::code 0.88
+      YAML::Type::glob 0.88
+      YAML::Type::ref 0.88
+      YAML::Type::regexp 0.88
+      YAML::Type::undef 0.88
+      YAML::Types 0.88
+      YAML::Warning 0.88
+      yaml_mapping 0.88
+      yaml_scalar 0.88
+      yaml_sequence 0.88
     requirements:
       ExtUtils::MakeMaker 6.59
       perl 5.008001
@@ -3786,20 +2836,12 @@ DISTRIBUTIONS
       URI::Escape 0
       WWW::RobotRules 6
       perl 5.008001
-  opts-0.06
-    pathname: M/MI/MIKIHOSHI/opts-0.06.tar.gz
+  namespace-clean-0.24
+    pathname: R/RI/RIBASUSHI/namespace-clean-0.24.tar.gz
     provides:
-      opts 0.06
+      namespace::clean 0.24
     requirements:
-      CPAN::Meta 0
-      CPAN::Meta::Prereqs 0
-      ExtUtils::CBuilder 0
-      ExtUtils::MakeMaker 6.36
-      Filter::Util::Call 0
-      Getopt::Long 2.37
-      Module::Build 0.38
-      PadWalker 1.9
-      Test::Exception 0
-      Test::Module::Used 0
-      Test::Perl::Critic 0
-      Text::Table 0
+      B::Hooks::EndOfScope 0.12
+      ExtUtils::CBuilder 0.27
+      Package::Stash 0.23
+      Test::More 0.88
