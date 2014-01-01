@@ -2,6 +2,20 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v1.1.2 2014-01-01T00:54:01Z
+
+    - performance improvement of get_tweet/set_tweet:
+
+        - get_tweet speed is increased by 900%.
+        - set_tweet speed is increased by 30%.
+        - db file size thin to 1/20.
+
+    - bugfix: display event user name to retweeted status user name.
+
+    - add RT mark to head of RT messages.
+
+    - add benchmark bench/component_tweet_gettter_and_setter.pl
+
 v1.1.1 2013-12-31T01:20:59Z
 
     - update cpanfile:
