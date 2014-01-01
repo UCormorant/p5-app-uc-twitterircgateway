@@ -1,4 +1,4 @@
-package App::Uc::TwitterIrcGateway v1.1.2;
+package App::Uc::TwitterIrcGateway v1.1.3;
 
 use 5.014;
 use warnings;

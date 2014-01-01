@@ -87,7 +87,7 @@
          "web" : "https://github.com/UCormorant/p5-app-uc-twitterircgateway"
       }
    },
-   "version" : "v1.1.2",
+   "version" : "v1.1.3",
    "x_contributors" : [
       "U=Cormorant <u@chimata.org>"
    ]
