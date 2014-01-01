@@ -12,7 +12,9 @@ my %CREATE_TABLE_SQL = (
     tweet            => q{
 CREATE TABLE 'tweet' (
   'id'    int  NOT NULL,
-  'tweet' text,
+  'text'  text,
+  'login' text,
+  'nick'  text,
 
   PRIMARY KEY ('id')
 )
@@ -22,22 +24,27 @@ CREATE TABLE 'tweet' (
 sub setup_dbh {
     my $handle = shift;
     my $db = file($handle->ircd->app_dir, sprintf "%s.tweet.sql", $handle->self->login);
-    my $exists_db = -e $db;
     $handle->{tweet_dbh} = DBI->connect(
         'dbi:SQLite:'.$db,undef,undef,
         +{ RaiseError => 1, PrintError => 0, AutoCommit => 1, sqlite_unicode => 1 }
     );
-    setup_database($handle) if not $exists_db;
+    setup_database($handle, force_create_table => 1);
 
-    $handle->{tweet_dbh}->do("DELETE FROM tweet");
+    # clean up
     $handle->{tweet_dbh}->do("VACUUM");
 
-    $handle->{tweet_db_guard} = AnyEvent->timer(after => 6*3600, interval => 6*3600, cb => sub {
-        return unless $handle->{tmap};
-        $handle->{tweet_dbh}->do(sprintf(
-            q{DELETE FROM tweet WHERE id NOT IN (%s)},
-            join(',', map { sprintf "'%s'", s/'/\\'/gr; } @{$handle->{timeline}}),
-        ));
+    # queue
+    $handle->{tweet_db_queue} = +[];
+
+    # transaction timer
+    $handle->{tweet_db_guard_txn} = AnyEvent->timer(after => 30, interval => 30, cb => sub {
+        commit_tweet_db(undef, $handle);
+    });
+
+    # VACUUM timer
+    $handle->{tweet_db_guard_vacuum} = AnyEvent->timer(after => 6*3600, interval => 6*3600, cb => sub {
+        return unless $handle->{tmap} and $handle->{timeline};
+        truncate_tweet_db(undef, $handle, $handle->{timeline});
     });
 }
 
@@ -79,13 +86,15 @@ sub get_tweet {
 
     setup_dbh($handle) unless defined $handle->{tweet_dbh};
 
+    # commit queue before select
+    $self->commit_tweet_db($handle);
+
     my $sth = $handle->{tweet_dbh}->prepare(q{
-        SELECT tweet FROM tweet
+        SELECT * FROM tweet
             WHERE id=?;
     });
     $sth->execute($tweet_id);
-    my $result = $sth->fetchrow_arrayref;
-    $result ? from_json($result->[0]) : undef;
+    $sth->fetchrow_hashref;
 }
 
 sub set_tweet {
@@ -99,21 +108,48 @@ sub set_tweet {
 
     my $sth = $handle->{tweet_dbh}->prepare(q{
         INSERT OR REPLACE
-            INTO tweet (id, tweet) VALUES (?, ?);
+            INTO tweet (id, text, login, nick) VALUES (?, ?, ?, ?);
     });
-    $sth->execute($tweet_id, to_json($tweet, pretty => 0));
+    my @values = (
+        $tweet->{id},
+        $tweet->{text},
+        $tweet->{user}{id},
+        $tweet->{user}{screen_name},
+    );
+    $sth->execute(@values);
 }
 
-sub truncate_tweet_db {
-    my ($self, $handle, $ids) = @_;
+sub commit_tweet_db {
+    shift;
+    my ($handle) = @_;
+    return unless defined $handle->{tweet_dbh};
+    return unless scalar @{$handle->{tweet_db_queue}};
+
+    my $dbh = $handle->{tweet_dbh};
+    my $sth = $handle->{tweet_dbh}->prepare(q{
+        INSERT OR REPLACE
+            INTO tweet (id, text, login, nick) VALUES (?, ?, ?, ?);
+    });
+
+    $dbh->begin_work;
+    while (my $q = shift @{$handle->{tweet_db_queue}}) {
+        $sth->execute(@$q);
+    }
+    $dbh->commit;
+}
+
+sub vacuum_tweet_db {
+    shift;
+    my ($handle, $ids) = @_;
     return unless defined $handle->{tweet_dbh};
     return unless ref $ids eq 'ARRAY' and scalar @$ids;
 
     my $dbh = $handle->{tweet_dbh};
     $dbh->do(
-        sprintf q{DELETE FROM tweet WHERE id IN (%s)},
+        sprintf q{DELETE FROM tweet WHERE id NOT IN (%s)},
             join ",", map { sprintf "'%s'", s/'/\\'/gr; } @$ids
     );
+    $dbh->do("VACUUM");
 }
 
 1;

@@ -200,6 +200,7 @@ sub register_user {
     }
 }
 
+
 # TwitterIrcGateway method #
 
 sub api {
@@ -241,7 +242,7 @@ sub tid_event {
             if (!$res) { $text = "$event error: $reason"; }
             else {
                 $event =~ s/[es]+$//;
-                $text = validate_text("${event}ed: ".$tweet->{user}{screen_name}.": ".$tweet->{text});
+                $text = validate_text("${event}ed: ".$tweet->{nick}.": ".$tweet->{text});
             }
             $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, "$text [$tid]" );
 
@@ -306,7 +307,9 @@ sub process_tweet {
 
     validate_tweet($tweet);
 
-    my $text = exists $tweet->{retweeted_status} ? sprintf('RT @%s: %s', $nick, $tweet->{retweeted_status}{text}) : $tweet->{text};
+    my $text = (defined $tweet->{retweeted_status} and defined $tweet->{retweeted_status}{user})
+        ? sprintf('%c RT @%s: %s', 0x267b, $tweet->{retweeted_status}{user}{screen_name}, $tweet->{retweeted_status}{text})
+        : $tweet->{text};
     my $stream_channel_name   = $handle->options->{stream};
     my $activity_channel_name = $handle->options->{activity};
     my $target_channel_name   = $target ? $target : $stream_channel_name;

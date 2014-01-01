@@ -1,6 +1,7 @@
 /.build/
 /_build/
 /Build
+/Build.bat
 /blib
 
 /carton.lock
@@ -25,3 +26,4 @@ MYMETA.*
 
 /App-Uc-TwitterIrcGateway-*
 _proverc
+*.sqlite

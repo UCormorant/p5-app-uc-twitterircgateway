@@ -1,1 +1,4 @@
 name = "App-Uc-TwitterIrcGateway"
+
+[FileGatherer]
+exclude_match = ['^bench/.*']

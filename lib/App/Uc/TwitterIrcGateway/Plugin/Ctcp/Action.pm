@@ -97,7 +97,7 @@ sub action {
                 $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, "$text [$tid]" );
             }
             else {
-                $text = sprintf '@%s %s', $tweet->{user}{screen_name}, $text;
+                $text = sprintf '@%s %s', $tweet->{nick}, $text;
                 $self->api($handle, 'statuses/update', params => {
                     status => $text, in_reply_to_status_id => $tweet->{id},
                 }, cb => sub {
@@ -162,17 +162,17 @@ sub action {
                 $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, "$text [$tid]" );
             }
             else {
-                my $notice = $tweet->text;
+                my $notice = $tweet->{text};
 
                 $comment = $comment ? $comment.' ' : '';
-                $text    = $comment.'QT @'.$tweet->user->screen_name.': '.$notice;
+                $text    = sprintf "%sQT @%s: %s", $comment, $tweet->{nick}, $notice;
                 while (length $text > 140 && $notice =~ /....$/) {
                     $notice =~ s/....$/.../;
-                    $text   = $comment.'QT @'.$tweet->user->screen_name.': '.$notice;
+                    $text   = sprintf "%sQT @%s:%s", $comment, $tweet->{nick}, $notice;
                 }
 
                 $self->api($handle, 'statuses/update', params => {
-                    status => $text, in_reply_to_status_id => $tweet->id,
+                    status => $text, in_reply_to_status_id => $tweet->{id},
                 }, cb => sub {
                     my ($header, $res, $reason) = @_;
                     if (!$res) { $self->send_cmd( $handle, $self->daemon, 'NOTICE', $target, qq|quotetweet error: "$text": $reason| ); }
