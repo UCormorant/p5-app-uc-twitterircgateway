@@ -44,7 +44,7 @@ sub setup_dbh {
     # VACUUM timer
     $handle->{tweet_db_guard_vacuum} = AnyEvent->timer(after => 6*3600, interval => 6*3600, cb => sub {
         return unless $handle->{tmap} and $handle->{timeline};
-        truncate_tweet_db(undef, $handle, $handle->{timeline});
+        vacuum_tweet_db(undef, $handle, $handle->{timeline});
     });
 }
 
