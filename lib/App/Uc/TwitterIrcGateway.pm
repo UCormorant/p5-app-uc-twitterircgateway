@@ -514,7 +514,7 @@ sub process_event {
             my $text = '';
             if ($tweet->{text}) {
                 my $time = datetime2simple($tweet->{created_at}, $self->time_zone);
-                $text  = validate_text("$tweet->{text} / https://twitter.com/$tweet->{screen_name}/status/$tweet->{id}");
+                $text  = validate_text("$tweet->{text} / https://twitter.com/$target->{screen_name}/status/$tweet->{id}");
                 $text .= " ($time)" if $time;
             }
             my $notice = "$happen ".$handle->self->nick.($text ? ": $text" : "");
