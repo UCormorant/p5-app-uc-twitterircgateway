@@ -473,7 +473,7 @@ sub process_event {
 
     # ログインユーザがターゲット
     if ($target->{id} == $handle->self->login) {
-        given (lc $happen) {
+        if ($happen) {
 #            when ('favorite')   { ... } # Tweet
 #            when ('unfavorite') { ... } # Tweet
 #            when ('follow')     { ... } # Null
@@ -481,19 +481,19 @@ sub process_event {
 #            when ('list_member_removed')      { ... } # List
 #            when ('list_member_subscribed')   { ... } # List
 #            when ('list_member_unsubscribed') { ... } # List
-            default {
-                validate_user($source);
-                my $user = $handle->get_users($login) // $handle->set_user(new_user($source));
-                my (%old_status, %new_status);
-                my @status_keys = qw/nick real url loc desc/;
-                my @source_keys = qw/screen_name name url location description/;
-                $old_status{nick} = $user->nick;
-                $old_status{real} = $user->realname;
-                $old_status{url}  = $user->server;
-                $old_status{loc}  = $user->away_message;
-                $old_status{desc} = $user->userinfo;
-                @new_status{@status_keys} = @{$source}{@source_keys};
+            validate_user($source);
+            my $user = $handle->get_users($login) // $handle->set_user(new_user($source));
+            my (%old_status, %new_status);
+            my @status_keys = qw/nick real url loc desc/;
+            my @source_keys = qw/screen_name name url location description/;
+            $old_status{nick} = $user->nick;
+            $old_status{real} = $user->realname;
+            $old_status{url}  = $user->server;
+            $old_status{loc}  = $user->away_message;
+            $old_status{desc} = $user->userinfo;
+            @new_status{@status_keys} = @{$source}{@source_keys};
 
+            if (not eq_hash(\%old_status, \%new_status)) {
                 $user->nick($source->{screen_name});
                 $user->realname($source->{name});
                 $user->server($source->{url});
@@ -502,22 +502,23 @@ sub process_event {
                 $user->update;
 
 #                $self->notice_profile_update($handle, $user, \%old_status, \%new_status);
-                my $activity_channel_name = $handle->options->{activity};
-                my $activity_channel = $handle->get_channels($activity_channel_name);
-                if (!$activity_channel->has_user($user)) {
-                    $activity_channel->join_users($user);
-                    $self->send_cmd( $handle, $user, 'JOIN', $activity_channel_name );
-                }
-
-                my $text = '';
-                if ($tweet->{text}) {
-                    my $time = datetime2simple($tweet->{created_at}, $self->time_zone);
-                    $text  = validate_text("$tweet->{text} / https://twitter.com/$tweet->{screen_name}/status/$tweet->{id}");
-                    $text .= " ($time)" if $time;
-                }
-                my $notice = "$happen ".$handle->self->nick.($text ? ": $text" : "");
-                $self->send_cmd( $handle, $user, 'NOTICE', $activity_channel_name, $notice );
             }
+
+            my $activity_channel_name = $handle->options->{activity};
+            my $activity_channel = $handle->get_channels($activity_channel_name);
+            if (!$activity_channel->has_user($user)) {
+                $activity_channel->join_users($user);
+                $self->send_cmd( $handle, $user, 'JOIN', $activity_channel_name );
+            }
+
+            my $text = '';
+            if ($tweet->{text}) {
+                my $time = datetime2simple($tweet->{created_at}, $self->time_zone);
+                $text  = validate_text("$tweet->{text} / https://twitter.com/$tweet->{screen_name}/status/$tweet->{id}");
+                $text .= " ($time)" if $time;
+            }
+            my $notice = "$happen ".$handle->self->nick.($text ? ": $text" : "");
+            $self->send_cmd( $handle, $user, 'NOTICE', $activity_channel_name, $notice );
         }
     }
 
@@ -910,10 +911,10 @@ sub streamer {
             delete $handle->{streamer};
             $self->streamer(handle => $handle, %config);
         },
-#        on_event => sub {
-#            my $event = shift;
-#            $self->process_event($handle, event => $event);
-#        },
+        on_event => sub {
+            my $event = shift;
+            $self->process_event($handle, event => $event);
+        },
         on_tweet => sub {
             my $tweet = shift;
             $self->process_tweet($handle, tweet => $tweet);
