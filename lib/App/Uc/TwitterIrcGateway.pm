@@ -1,4 +1,4 @@
-package App::Uc::TwitterIrcGateway v1.1.3;
+package App::Uc::TwitterIrcGateway v1.1.4;
 
 use 5.014;
 use warnings;
@@ -790,6 +790,7 @@ sub twitter_configure {
     $handle->options->{account} //= $handle->self->login;
     $handle->options->{mention_count} //= 20;
     $handle->options->{shuffle_tid} //= 0;
+    $handle->options->{in_memory} //= 0;
     if (!$handle->options->{stream} ||
         not $self->check_channel($handle, $handle->options->{stream})) {
             $handle->options->{stream} = $self->stream_channel;
@@ -907,6 +908,7 @@ sub streamer {
         },
         on_error => sub {
             $self->log($handle, error => $_[0]);
+            return unless defined $handle;
             $self->send_cmd( $handle, $self->daemon, 'NOTICE', $handle->options->{stream}, "error: $_[0]" );
             delete $handle->{streamer};
             $self->streamer(handle => $handle, %config);

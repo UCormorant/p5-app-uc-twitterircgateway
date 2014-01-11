@@ -73,6 +73,7 @@ sub remark2db :LogLevel('remark2db') {
             $columns->{$col} = delete $attr->{$col} if exists $attr->{$col};
         }
 
+        $plugin->commit;
         $plugin->{schema}->update_or_create_remark( $columns );
     }
 

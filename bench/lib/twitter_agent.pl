@@ -9,8 +9,9 @@ sub twitter_agent {
 
     my ($pin, @userdata);
     while (not ($nt->{authorized} = !!eval { $nt->verify_credentials; })) {
+        my $url = eval { $nt->get_authorization_url(); };
         say 'please open the following url and allow this app, then enter PIN code.';
-        say $nt->get_authorization_url();
+        say $url;
         print 'PIN: '; chomp($pin = <STDIN>);
 
         @{$conf_user}{qw/token token_secret user_id screen_name/} = $nt->request_access_token(verifier => $pin);
