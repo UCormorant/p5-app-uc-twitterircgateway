@@ -10,6 +10,7 @@ use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-uc-ircgateway', '
 use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-uc-model-twitter', 'lib');
 use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-text-inflatedsprintf', 'lib');
 use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-teng-plugin-dbic-resultset', 'lib');
+use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'sharl-AnyEvent-Twitter-Stream', 'lib');
 use lib File::Spec->catdir(dirname(__FILE__), '../lib');
 
 use App::Uc::TwitterIrcGateway;
@@ -180,6 +181,10 @@ process_event 復旧
 
 realnameにin_memoryって入れるとチャンネルとかユーザの情報持ってるDBを
 ファイルじゃなくてメモリ上に展開します。
+
+Twitter APIがSSLオンリーになったのでその対応。
+依存関係の再設定。AnyEvent::Twitter::Streamは相変わらず落ちるので
+サブモジュールに対処版を追加。
 
 
 TODO:

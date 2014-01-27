@@ -10,3 +10,6 @@
 [submodule "extlib/p5-teng-plugin-dbic-resultset"]
 	path = extlib/p5-teng-plugin-dbic-resultset
 	url = git@github.com:UCormorant/p5-teng-plugin-dbic-resultset.git
+[submodule "extlib/sharl-AnyEvent-Twitter-Stream"]
+	path = extlib/sharl-AnyEvent-Twitter-Stream
+	url = git@github.com:sharl/AnyEvent-Twitter-Stream.git
