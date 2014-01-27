@@ -5,9 +5,9 @@ requires 'perl', '5.014';
 #requires 'Uc::Model::Twitter';
 
 # Twitter
-requires 'Net::Twitter::Lite';
-requires 'AnyEvent::Twitter';
-requires 'AnyEvent::Twitter::Stream';
+requires 'Net::Twitter::Lite', '0.12005';
+requires 'AnyEvent::Twitter', '0.63';
+requires 'AnyEvent::Twitter::Stream', '0.26';
 
 requires 'Clone';
 requires 'Config::Pit';

@@ -821,7 +821,7 @@ sub twitter_agent {
 
     my ($conf_app, $conf_user) = @{$handle}{qw/conf_app conf_user/};
     unless (blessed $handle->{nt} and $handle->{nt}->isa('Net::Twitter::Lite')) {
-        $handle->{nt} = Net::Twitter::Lite::WithAPIv1_1->new(%$conf_app, useragent_args => { timeout => 10 });
+        $handle->{nt} = Net::Twitter::Lite::WithAPIv1_1->new(%$conf_app, useragent_args => { timeout => 10 }, ssl => 1);
     }
 
     my $nt = $handle->{nt};
