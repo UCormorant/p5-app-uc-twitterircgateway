@@ -27,6 +27,7 @@ requires 'AnyEvent', '7.04';
 requires 'AnyEvent::IRC', '0.6';
 requires 'Class::Accessor::Lite';
 requires 'Class::Component', '0.17';
+requires 'DBD::mysql';
 requires 'DBD::SQLite', '1.027';
 requires 'DateTime::Format::HTTP';
 requires 'DateTime::Format::MySQL';
