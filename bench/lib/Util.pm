@@ -1,20 +1,28 @@
 package lib::Util;
 
-use 5.010;
-use strict;
+use 5.014;
 use warnings;
 use utf8;
 use parent qw(Exporter);
+
+use File::Basename qw(dirname);
+use File::Spec::Functions qw(catdir);
+use lib catdir(dirname(__FILE__));
+require 'twitter_agent.pl';
+
 use autodie;
-use Encode qw(find_encoding);
+use Encode::Locale qw(decode_argv);
+use Net::Twitter::Lite::WithAPIv1_1;
 use AnyEvent::Twitter::Stream;
 
-our @EXPORT = qw(codec setup_dbh sample_stream);
+our @EXPORT = qw(twitter_agent setup_dbh sample_stream);
 
-use Data::Lock qw(dlock);
-dlock my $CHARSET = ($^O eq 'MSWin32' ? 'cp932' : 'utf8');
-binmode STDIN  => ":encoding($CHARSET)";
-binmode STDOUT => ":encoding($CHARSET)";
+if (-t) {
+    STDIN->binmode(":encoding(console_in)");
+    STDOUT->binmode(":encoding(console_out)");
+    STDERR->binmode(":encoding(console_out)");
+    decode_argv();
+}
 
 sub import {
     strict->import;
@@ -22,12 +30,6 @@ sub import {
     utf8->import;
 
     lib::Util->export_to_level(1, @_);
-}
-
-our %codec;
-sub codec {
-    my $charset = shift // $CHARSET;
-    $codec{$charset} ? $codec{$charset} : find_encoding($charset);
 }
 
 sub setup_dbh {
@@ -46,7 +48,9 @@ sub setup_dbh_mysql {
     my $db = shift || 'test';
     my $user = shift;
     my $pass = shift;
-    DBI->connect('dbi:mysql:'.$db,$user,$pass,{RaiseError => 1, PrintError => 0, AutoCommit => 1,  mysql_enable_utf8 => 1});
+    my $dbh = DBI->connect('dbi:mysql:'.$db,$user,$pass,{RaiseError => 1, PrintError => 0, AutoCommit => 1,  mysql_enable_utf8 => 1});
+    $dbh->do('SET NAMES utf8mb4');
+    $dbh;
 }
 
 sub sample_stream {

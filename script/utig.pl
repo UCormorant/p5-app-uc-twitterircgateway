@@ -4,26 +4,22 @@ use 5.014;
 use warnings;
 use utf8;
 
-use File::Spec;
-use File::Basename;
-use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-uc-ircgateway', 'lib');
-use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-uc-model-twitter', 'lib');
-use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-text-inflatedsprintf', 'lib');
-use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-teng-plugin-dbic-resultset', 'lib');
-use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'sharl-AnyEvent-Twitter-Stream', 'lib');
-use lib File::Spec->catdir(dirname(__FILE__), '../lib');
+use File::Basename qw(dirname);
+use File::Spec::Functions qw(catdir);
+use lib catdir(dirname(__FILE__), '..', 'extlib', 'p5-uc-ircgateway', 'lib');
+use lib catdir(dirname(__FILE__), '..', 'extlib', 'p5-uc-model-twitter', 'lib');
+use lib catdir(dirname(__FILE__), '..', 'extlib', 'p5-text-inflatedsprintf', 'lib');
+use lib catdir(dirname(__FILE__), '..', 'extlib', 'p5-teng-plugin-dbic-resultset', 'lib');
+use lib catdir(dirname(__FILE__), '..', 'extlib', 'sharl-AnyEvent-Twitter-Stream', 'lib');
+use lib catdir(dirname(__FILE__), '..', 'lib');
 
 use App::Uc::TwitterIrcGateway;
 
-use Data::Lock qw(dlock);
-dlock my $CHARSET = ($^O eq 'MSWin32' ? 'cp932' : 'utf8');
-binmode STDIN  => ":encoding($CHARSET)";
-binmode STDOUT => ":encoding($CHARSET)";
-
+use Encode::Locale;
 use Smart::Options;
 use Term::ReadKey qw(ReadMode);
 use Config::Pit qw(pit_get pit_set);
-use Net::Twitter::Lite::WithAPIv1_1;
+use Net::Twitter::Lite::WithAPIv1_1 0.12005;
 
 local $| = 1;
 

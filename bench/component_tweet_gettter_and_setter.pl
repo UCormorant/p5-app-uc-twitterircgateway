@@ -7,17 +7,15 @@ use autodie;
 
 use Benchmark qw(:all :hireswallclock);
 
-use File::Spec;
-use File::Basename;
-use lib File::Spec->catdir(dirname(__FILE__), '../extlib', 'p5-uc-ircgateway', 'lib');
-use lib File::Spec->catdir(dirname(__FILE__), '../lib');
-use lib File::Spec->catdir(dirname(__FILE__));
+use File::Basename qw(dirname basename);
+use File::Spec::Functions qw(catdir catfile);
+use lib catdir(dirname(__FILE__), '..', 'extlib', 'p5-uc-ircgateway', 'lib');
+use lib catdir(dirname(__FILE__), '..', 'lib');
+use lib catdir(dirname(__FILE__));
 use lib::Util;
 
 use Uc::IrcGateway::Common qw(to_json from_json);
 use Config::Pit qw(pit_get);
-
-require File::Spec->catfile(dirname(__FILE__), 'lib', 'twitter_agent.pl');
 
 my $conf_app  = pit_get('utig.pl', require =>{
     consumer_key    => 'your twitter consumer_key',
@@ -36,15 +34,15 @@ my $tweets = sample_stream({
 
 my $dir = dirname(__FILE__);
 cmpthese(30 => +{
-    store_all => store_all(File::Spec->catfile($dir, "store_all_$db.sqlite")),
-    store_nes => store_nes(File::Spec->catfile($dir, "store_nes_$db.sqlite")),
-    store_all_txn => store_all(File::Spec->catfile($dir, "store_all_$db.sqlite"), 'enable_txn'),
-    store_nes_txn => store_nes(File::Spec->catfile($dir, "store_nes_$db.sqlite"), 'enable_txn'),
+    store_all => store_all(catfile($dir, "store_all_$db.sqlite")),
+    store_nes => store_nes(catfile($dir, "store_nes_$db.sqlite")),
+    store_all_txn => store_all(catfile($dir, "store_all_$db.sqlite"), 'enable_txn'),
+    store_nes_txn => store_nes(catfile($dir, "store_nes_$db.sqlite"), 'enable_txn'),
 }, 'auto');
 
 cmpthese(60 => +{
-    fetch_all => fetch_all(File::Spec->catfile($dir, "store_all_$db.sqlite")),
-    fetch_nes => fetch_nes(File::Spec->catfile($dir, "store_nes_$db.sqlite")),
+    fetch_all => fetch_all(catfile($dir, "store_all_$db.sqlite")),
+    fetch_nes => fetch_nes(catfile($dir, "store_nes_$db.sqlite")),
 }, 'auto');
 
 exit;
