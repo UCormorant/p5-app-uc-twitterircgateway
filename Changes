@@ -2,6 +2,14 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v1.1.5 2014-02-08T13:36:53Z
+
+    - bugfix: tweet2db's remark2db doesn't work well
+
+    - updated p5-uc-model-twitter: you should migrate DB
+        - SQL files for migration are in
+          ./extlib/p5-uc-model-twitter/migrate/v1.1.2_to_v1.2.0/
+
 v1.1.4 2014-02-08T05:35:35Z
 
     - added features:
