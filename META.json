@@ -4,7 +4,7 @@
       "L<https://twitter.com/c18t>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.8.3, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.133380",
    "license" : [
       "perl_5"
    ],
@@ -45,26 +45,31 @@
          "requires" : {
             "AnyEvent" : "7.04",
             "AnyEvent::IRC" : "0.6",
-            "AnyEvent::Twitter" : "0",
-            "AnyEvent::Twitter::Stream" : "0",
+            "AnyEvent::Twitter" : "0.63",
+            "AnyEvent::Twitter::Stream" : "0.26",
             "Class::Accessor::Lite" : "0",
             "Class::Component" : "0.17",
-            "Clone" : "0",
+            "Clone" : "0.36",
             "Config::Pit" : "0",
             "DBD::SQLite" : "1.027",
-            "Data::Lock" : "0",
+            "DBD::mysql" : "0",
             "DateTime::Format::DateParse" : "0",
             "DateTime::Format::HTTP" : "0",
             "DateTime::Format::MySQL" : "0",
+            "Encode::Locale" : "1.03",
+            "File::HomeDir" : "1.00",
             "HTML::Entities" : "0",
             "JSON" : "0",
             "Log::Dispatch" : "2.36",
-            "Net::Twitter::Lite" : "0",
+            "Net::OAuth" : "0.26",
+            "Net::Twitter::Lite" : "0.12006",
             "Path::Class" : "0.29",
-            "Smart::Options" : "0",
+            "Smart::Options" : "0.053",
+            "TOML" : "0.92",
             "Teng" : "0.17",
-            "Term::ReadKey" : "0",
+            "Term::ReadKey" : "2.31",
             "YAML" : "0",
+            "experimental" : "0.006",
             "namespace::clean" : "0",
             "perl" : "5.014"
          }
@@ -87,7 +92,7 @@
          "web" : "https://github.com/UCormorant/p5-app-uc-twitterircgateway"
       }
    },
-   "version" : "v1.1.3",
+   "version" : "v1.1.4",
    "x_contributors" : [
       "U=Cormorant <u@chimata.org>"
    ]

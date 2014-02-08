@@ -92,23 +92,23 @@ CTCP-actionにいろんなコマンドを実装してあります。
 
 ## App::Uc::TwitterIrcGateway
 
-- [perl](http://search.cpan.org/perldoc?perl) >= 5.14
+- [perl](https://metacpan.org/pod/perl) >= 5.14
 - Uc::IrcGateway [https://github.com/UCormorant/p5-uc-ircgateway](https://github.com/UCormorant/p5-uc-ircgateway)
 - Uc::Model::Twitter [https://github.com/UCormorant/p5-uc-model-twitter](https://github.com/UCormorant/p5-uc-model-twitter)
-- [Net::Twitter::Lite](http://search.cpan.org/perldoc?Net::Twitter::Lite)
-- [AnyEvent::Twitter](http://search.cpan.org/perldoc?AnyEvent::Twitter)
-- [AnyEvent::Twitter::Stream](http://search.cpan.org/perldoc?AnyEvent::Twitter::Stream)
-- [Clone](http://search.cpan.org/perldoc?Clone)
-- [Config::Pit](http://search.cpan.org/perldoc?Config::Pit)
-- [DateTime::Format::DateParse](http://search.cpan.org/perldoc?DateTime::Format::DateParse)
-- [HTML::Entities](http://search.cpan.org/perldoc?HTML::Entities)
-- [namespace::clean](http://search.cpan.org/perldoc?namespace::clean)
+- [Net::Twitter::Lite](https://metacpan.org/pod/Net::Twitter::Lite)
+- [AnyEvent::Twitter](https://metacpan.org/pod/AnyEvent::Twitter)
+- [AnyEvent::Twitter::Stream](https://metacpan.org/pod/AnyEvent::Twitter::Stream)
+- [Clone](https://metacpan.org/pod/Clone)
+- [Config::Pit](https://metacpan.org/pod/Config::Pit)
+- [DateTime::Format::DateParse](https://metacpan.org/pod/DateTime::Format::DateParse)
+- [HTML::Entities](https://metacpan.org/pod/HTML::Entities)
+- [namespace::clean](https://metacpan.org/pod/namespace::clean)
 
 ## utig.pl
 
-- [Data::Lock](http://search.cpan.org/perldoc?Data::Lock)
-- [Smart::Options](http://search.cpan.org/perldoc?Smart::Options)
-- [Term::ReadKey](http://search.cpan.org/perldoc?Term::ReadKey)
+- [Data::Lock](https://metacpan.org/pod/Data::Lock)
+- [Smart::Options](https://metacpan.org/pod/Smart::Options)
+- [Term::ReadKey](https://metacpan.org/pod/Term::ReadKey)
 
 # BUGS AND LIMITATIONS
 
@@ -124,4 +124,4 @@ Please report any bugs or feature requests to
 Copyright (C) U=Cormorant.
 
 This module is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself. See [perlartistic](http://search.cpan.org/perldoc?perlartistic).
+modify it under the same terms as Perl itself. See [perlartistic](https://metacpan.org/pod/perlartistic).

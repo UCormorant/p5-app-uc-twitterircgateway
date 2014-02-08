@@ -2,6 +2,16 @@ Revision history for utig.pl
 
 {{$NEXT}}
 
+v1.1.4 2014-02-08T05:35:35Z
+
+    - added features:
+        - processing event stream: notice some event that is to you
+        - TRIAL option 'in_memory':
+            - all of connection's data store into memory.
+              it will save as sqlite file when disconnecting.
+
+    - bugfix: use SSL for that Twitter enforces SSL encryption for apps connecting to its API
+
 v1.1.3 2014-01-01T07:54:39Z
 
     - bugfix: fatal error occered during vacuum tweet db.
