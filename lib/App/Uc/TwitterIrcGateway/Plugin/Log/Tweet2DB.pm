@@ -67,8 +67,13 @@ sub remark2db :LogLevel('remark2db') {
         my $id  = delete $attr->{id}  if exists $attr->{id};
         my $tid = delete $attr->{tid} if exists $attr->{tid};
         $id = $handle->{tmap}->get($tid) if $tid;
+        my $tweet = $handle->ircd->get_tweet($handle, $id);
 
-        my $columns = { id => $id, user_id => $handle->self->login };
+        my $columns = {
+            id => $id,
+            user_id => $handle->self->login,
+            status_user_id => $tweet->{login},
+        };
         for my $col (qw/favorited retweeted/) {
             $columns->{$col} = delete $attr->{$col} if exists $attr->{$col};
         }
