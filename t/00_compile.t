@@ -1,4 +1,4 @@
-use strict;
+use t::Util;
 use Test::More tests => 8;
 
 use_ok $_ for qw(
